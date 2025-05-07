@@ -16,7 +16,7 @@ const Header = () => {
         <FaSearch className="text-[#f5f5f5]" />
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Buscar"
           className="bg-[#1f1f1f] outline-none text-[#f5f5f5] px-2 py-1 rounded-md"
         />
       </div>

@@ -4,10 +4,11 @@ import Greetings from "../components/home/Greetings";
 import MiniCard from "../components/home/MiniCard";
 import { BsCashCoin } from "react-icons/bs";
 import { GrInProgress } from "react-icons/gr";
+import RecentOrders from "../components/home/RecentOrders";
 
 const Home: FC = () => {
   return (
-    <section className="bg-[#1f1f1f] h-[calc(100vh-5.75rem)] overflow-hidden flex gap-3">
+    <section className="bg-[#1f1f1f] flex gap-3">
       {/*LEFT DIV */}
       <div className="flex-[3] bg-[#1a1a1a]">
         <Greetings />
@@ -25,6 +26,7 @@ const Home: FC = () => {
             footerNum={3.6}
           />
         </div>
+        <RecentOrders />
       </div>
       {/*RIGHT DIV */}
       <div className="flex-[2] bg-[#121212]"></div>
