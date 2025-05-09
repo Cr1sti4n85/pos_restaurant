@@ -22,7 +22,9 @@ const MiniCard: FC<MiniCardProps> = ({ title, icon, number, footerNum }) => {
         </button>
       </div>
       <div>
-        <h1 className="text-[#f5f5f5] text-4xl font-bold mt-4">{number}</h1>
+        <h1 className="text-[#f5f5f5] text-4xl font-bold mt-4">
+          {title === "Total Earnings" ? `$${number}` : number}
+        </h1>
         <h1 className="text-[#f5f5f5] text-lg mt-2">
           <span className="text-[#02ca3a]">{footerNum}</span> más que ayer
         </h1>
