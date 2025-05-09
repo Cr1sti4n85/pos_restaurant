@@ -9,7 +9,7 @@ import { PopularDishes } from "../components/home/PopularDishes";
 
 const Home: FC = () => {
   return (
-    <section className="bg-[#1f1f1f] flex gap-3">
+    <section className="bg-[#1f1f1f] flex gap-3 h-[calc(100vh-5rem)] overflow-hidden">
       {/*LEFT DIV */}
       <div className="flex-[3] bg-[#1a1a1a]">
         <Greetings />

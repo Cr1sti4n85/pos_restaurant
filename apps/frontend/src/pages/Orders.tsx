@@ -1,36 +1,50 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import BottomNav from "../components/shared/BottomNav";
 import OrderCard from "../components/orders/OrderCard";
+import BackButton from "../components/shared/BackButton";
 
 const Orders: FC = () => {
+  const [status, setStatus] = useState("all");
+
   return (
     <section className="bg-[#1f1f1f] h-[calc(100vh-5rem)] overflow-hidden">
       <div className="flex items-center justify-between px-10 py-4 mt-2">
-        <h1 className="text-[#f5f5f5] text-2xl font-bold tracking-wider">
-          Ordenes
-        </h1>
+        <div className="flex items-center gap-4">
+          <BackButton />
+          <h1 className="text-[#f5f5f5] text-2xl font-bold tracking-wider">
+            Ordenes
+          </h1>
+        </div>
         <div className="flex items-center justify-around gap-4">
           <button
-            className="text-[#ababab] text-lg 
-          rounded-lg px-5 py-2 font-semibold"
+            onClick={() => setStatus("all")}
+            className={`text-[#ababab] text-lg 
+            ${status === "all" && "bg-[#383838] rounded-lg "}
+           font-semibold px-5 py-2`}
           >
             Todas
           </button>
           <button
-            className="text-[#ababab] text-lg bg-[#383838]
-          rounded-lg px-5 py-2 font-semibold"
+            onClick={() => setStatus("progress")}
+            className={`text-[#ababab] text-lg 
+            ${status === "progress" && "bg-[#383838] rounded-lg "}
+           font-semibold px-5 py-2`}
           >
             En proceso
           </button>
           <button
-            className="text-[#ababab] text-lg 
-          rounded-lg px-5 py-2 font-semibold"
+            onClick={() => setStatus("ready")}
+            className={`text-[#ababab] text-lg 
+            ${status === "ready" && "bg-[#383838] rounded-lg"}
+           font-semibold px-5 py-2`}
           >
             Listas
           </button>
           <button
-            className="text-[#ababab] text-lg 
-          rounded-lg px-5 py-2 font-semibold"
+            onClick={() => setStatus("completed")}
+            className={`text-[#ababab] text-lg 
+            ${status === "completed" && "bg-[#383838] rounded-lg"}
+           font-semibold px-5 py-2`}
           >
             Entregadas
           </button>
