@@ -1,11 +1,5 @@
-import { FC, ReactElement } from "react";
-
-type MiniCardProps = {
-  title: string;
-  icon: ReactElement;
-  number: number;
-  footerNum: number;
-};
+import { FC } from "react";
+import { MiniCardProps } from "../../types";
 
 const MiniCard: FC<MiniCardProps> = ({ title, icon, number, footerNum }) => {
   return (
