@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import BackButton from "../components/shared/BackButton";
 import BottomNav from "../components/shared/BottomNav";
 import TableCard from "../components/tables/TableCard";
 import { tables } from "../constants/tables";
 
-const Tables = () => {
+const Tables: FC = () => {
   const [status, setStatus] = useState<string>("all");
 
   return (

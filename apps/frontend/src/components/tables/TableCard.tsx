@@ -1,17 +1,23 @@
 import { FC } from "react";
 import { getBgColor } from "../../utils/getBgColor";
+import { useNavigate } from "react-router";
 
 type TableCardProps = {
   name: string;
   status: string;
   initials: string;
-  key: number;
 };
 
-const TableCard: FC<TableCardProps> = ({ key, name, status, initials }) => {
+const TableCard: FC<TableCardProps> = ({ name, status, initials }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    if (status === "Reservada") return;
+    navigate("/menu");
+  };
+
   return (
     <div
-      key={key}
+      onClick={handleClick}
       className="w-[300px] bg-[#262626] hover:bg-[#2c2c2c] p-4 rounded-lg cursor-pointer"
     >
       <div className="flex items-center justify-between px-1">
