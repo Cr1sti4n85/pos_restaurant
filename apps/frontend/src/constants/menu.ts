@@ -1,6 +1,6 @@
-import { MenunItems, Menus } from "../types";
+import { MenuItems, Menus } from "../types";
 
-export const startersItem: MenunItems[] = [
+export const startersItem: MenuItems[] = [
   {
     id: 1,
     name: "Paneer Tikka",
@@ -39,7 +39,7 @@ export const startersItem: MenunItems[] = [
   },
 ];
 
-export const mainCourse: MenunItems[] = [
+export const mainCourse: MenuItems[] = [
   {
     id: 1,
     name: "Butter Chicken",
@@ -78,7 +78,7 @@ export const mainCourse: MenunItems[] = [
   },
 ];
 
-export const beverages: MenunItems[] = [
+export const beverages: MenuItems[] = [
   {
     id: 1,
     name: "Masala Chai",
@@ -117,7 +117,7 @@ export const beverages: MenunItems[] = [
   },
 ];
 
-export const soups: MenunItems[] = [
+export const soups: MenuItems[] = [
   {
     id: 1,
     name: "Tomato Soup",
@@ -156,7 +156,7 @@ export const soups: MenunItems[] = [
   },
 ];
 
-export const desserts: MenunItems[] = [
+export const desserts: MenuItems[] = [
   {
     id: 1,
     name: "Gulab Jamun",
@@ -183,7 +183,7 @@ export const desserts: MenunItems[] = [
   },
 ];
 
-export const pizzas: MenunItems[] = [
+export const pizzas: MenuItems[] = [
   {
     id: 1,
     name: "Margherita Pizza",
@@ -204,7 +204,7 @@ export const pizzas: MenunItems[] = [
   },
 ];
 
-export const alcoholicDrinks: MenunItems[] = [
+export const alcoholicDrinks: MenuItems[] = [
   {
     id: 1,
     name: "Cerveza",
@@ -243,7 +243,7 @@ export const alcoholicDrinks: MenunItems[] = [
   },
 ];
 
-export const salads: MenunItems[] = [
+export const salads: MenuItems[] = [
   {
     id: 1,
     name: "Caesar Salad",

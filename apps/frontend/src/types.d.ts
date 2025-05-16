@@ -15,7 +15,7 @@ export type ModalProps = {
 };
 
 //menus
-export interface MenunItems {
+export interface MenuItems {
   id: number;
   name: string;
   price: number;
