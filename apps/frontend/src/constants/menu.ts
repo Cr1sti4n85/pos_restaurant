@@ -1,4 +1,6 @@
-export const startersItem = [
+import { MenunItems, Menus } from "../types";
+
+export const startersItem: MenunItems[] = [
   {
     id: 1,
     name: "Paneer Tikka",
@@ -37,7 +39,7 @@ export const startersItem = [
   },
 ];
 
-export const mainCourse = [
+export const mainCourse: MenunItems[] = [
   {
     id: 1,
     name: "Butter Chicken",
@@ -76,7 +78,7 @@ export const mainCourse = [
   },
 ];
 
-export const beverages = [
+export const beverages: MenunItems[] = [
   {
     id: 1,
     name: "Masala Chai",
@@ -115,7 +117,7 @@ export const beverages = [
   },
 ];
 
-export const soups = [
+export const soups: MenunItems[] = [
   {
     id: 1,
     name: "Tomato Soup",
@@ -154,7 +156,7 @@ export const soups = [
   },
 ];
 
-export const desserts = [
+export const desserts: MenunItems[] = [
   {
     id: 1,
     name: "Gulab Jamun",
@@ -181,7 +183,7 @@ export const desserts = [
   },
 ];
 
-export const pizzas = [
+export const pizzas: MenunItems[] = [
   {
     id: 1,
     name: "Margherita Pizza",
@@ -202,7 +204,7 @@ export const pizzas = [
   },
 ];
 
-export const alcoholicDrinks = [
+export const alcoholicDrinks: MenunItems[] = [
   {
     id: 1,
     name: "Cerveza",
@@ -241,7 +243,7 @@ export const alcoholicDrinks = [
   },
 ];
 
-export const salads = [
+export const salads: MenunItems[] = [
   {
     id: 1,
     name: "Caesar Salad",
@@ -270,10 +272,11 @@ export const salads = [
     id: 5,
     name: "Tuna Salad",
     price: 350,
+    category: "No-Vegetariano",
   },
 ];
 
-export const menus = [
+export const menus: Menus[] = [
   {
     id: 1,
     name: "Entrada",
@@ -283,7 +286,7 @@ export const menus = [
   },
   {
     id: 2,
-    name: "plato principal",
+    name: "Plato principal",
     bgColor: "#5b45b0",
     icon: "🍛",
     items: mainCourse,
@@ -295,8 +298,8 @@ export const menus = [
     icon: "🍹",
     items: beverages,
   },
-  { id: 4, name: "Soups", bgColor: "#735f32", icon: "🍜", items: soups },
-  { id: 5, name: "Desserts", bgColor: "#1d2569", icon: "🍰", items: desserts },
+  { id: 4, name: "Sopas", bgColor: "#735f32", icon: "🍜", items: soups },
+  { id: 5, name: "Postres", bgColor: "#1d2569", icon: "🍰", items: desserts },
   { id: 6, name: "Pizzas", bgColor: "#285430", icon: "🍕", items: pizzas },
   {
     id: 7,

@@ -13,3 +13,19 @@ export type ModalProps = {
   isOpen: boolean;
   children: React.ReactNode;
 };
+
+//menus
+export interface MenunItems {
+  id: number;
+  name: string;
+  price: number;
+  category: string;
+}
+
+export interface Menus {
+  id: number;
+  name: string;
+  bgColor: string;
+  icon: string;
+  items: MenunItems[];
+}
