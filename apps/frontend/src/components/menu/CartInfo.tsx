@@ -7,7 +7,7 @@ const CartInfo: FC = () => {
     <div className="px-4 py-2">
       <h1 className="text-[#e4e4e4] text-lg font-semibold tracking-wide">
         Detalle de la orden
-        <div className="mt-4 overflow-y-scroll h-[380px]">
+        <div className="scroll mt-4 overflow-y-scroll h-[150px]">
           <div className="bg-[#1f1f1f] rounded-lg px-4 py-4 mb-2">
             <div className="flex items-center justify-between">
               <h1 className="text-[#ababab] font-semibold tracking-wide text-md">

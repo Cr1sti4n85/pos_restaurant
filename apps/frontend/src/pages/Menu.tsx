@@ -5,10 +5,11 @@ import { MdRestaurantMenu } from "react-icons/md";
 import MenuContainer from "../components/menu/MenuContainer";
 import CustomerInfo from "../components/menu/CustomerInfo";
 import CartInfo from "../components/menu/CartInfo";
+import Bill from "../components/menu/Bill";
 
 const Menu: FC = () => {
   return (
-    <section className="bg-[#1f1f1f] flex gap-3 h-[calc(100vh-5rem)] overflow-hidden">
+    <section className="bg-[#1f1f1f] flex gap-3 h-[calc(100vh-5.75rem)] overflow-hidden">
       {/*LEFT DIV */}
       <div className="flex-[3] ">
         <div className="flex items-center justify-between px-10 py-4 mt-2">
@@ -33,7 +34,7 @@ const Menu: FC = () => {
         <MenuContainer />
       </div>
       {/*RIGHT DIV */}
-      <div className="flex-[1] bg-[#1a1a1a] mt-4 h-[780px] rounded-lg pt-2">
+      <div className="flex-[1] bg-[#1a1a1a] mt-4 rounded-lg pt-2">
         {/* Customer info */}
         <CustomerInfo />
         <hr className="border-[#2a2a2a] border-t-2" />
@@ -42,6 +43,7 @@ const Menu: FC = () => {
         <hr className="border-[#2a2a2a] border-t-2" />
 
         {/* Bills */}
+        <Bill />
       </div>
 
       <BottomNav />
