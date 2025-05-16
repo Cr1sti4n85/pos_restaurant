@@ -29,3 +29,7 @@ export interface Menus {
   icon: string;
   items: MenunItems[];
 }
+
+export type SelectedMenuProps = {
+  menu: MenuItems;
+};

@@ -1,9 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { MenuItems } from "../../types";
-
-type SelectedMenuProps = {
-  menu: MenuItems;
-};
+import { SelectedMenuProps } from "../../types";
 
 const SelectedMenu: FC<SelectedMenuProps> = ({ menu }) => {
   const [itemCount, setItemCount] = useState<number>(0);

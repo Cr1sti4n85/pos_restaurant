@@ -3,6 +3,8 @@ import BottomNav from "../components/shared/BottomNav";
 import BackButton from "../components/shared/BackButton";
 import { MdRestaurantMenu } from "react-icons/md";
 import MenuContainer from "../components/menu/MenuContainer";
+import CustomerInfo from "../components/menu/CustomerInfo";
+import CartInfo from "../components/menu/CartInfo";
 
 const Menu: FC = () => {
   return (
@@ -31,7 +33,16 @@ const Menu: FC = () => {
         <MenuContainer />
       </div>
       {/*RIGHT DIV */}
-      <div className="flex-[1] bg-blue-500"></div>
+      <div className="flex-[1] bg-[#1a1a1a] mt-4 h-[780px] rounded-lg pt-2">
+        {/* Customer info */}
+        <CustomerInfo />
+        <hr className="border-[#2a2a2a] border-t-2" />
+        {/* Cart items */}
+        <CartInfo />
+        <hr className="border-[#2a2a2a] border-t-2" />
+
+        {/* Bills */}
+      </div>
 
       <BottomNav />
     </section>
