@@ -27,7 +27,7 @@ const RecentOrders: FC = () => {
           />
         </div>
         {/*Order list */}
-        <div className="mt-4 px-6 pb-2 gap-2 overflow-y-scroll h-[120px]">
+        <div className=" scroll mt-4 px-6 pb-2 gap-2 overflow-y-scroll h-[120px]">
           <OrderList />
           <OrderList />
           <OrderList />

@@ -35,7 +35,7 @@ const Tables: FC = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap gap-5 px-10 py-5 overflow-y-scroll h-[700px]">
+      <div className="scroll flex flex-wrap gap-5 px-10 py-5 overflow-y-scroll h-[700px]">
         {tables?.map((table) => (
           <TableCard
             key={table.id}

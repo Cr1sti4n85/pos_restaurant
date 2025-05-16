@@ -50,7 +50,7 @@ const Orders: FC = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap gap-6 px-16 py-4 overflow-y-scroll h-[calc(100vh-5rem-7rem)]">
+      <div className="scroll flex flex-wrap gap-6 px-16 py-4 overflow-y-scroll h-[calc(100vh-5rem-7rem)]">
         <OrderCard />
         <OrderCard />
         <OrderCard />

@@ -2,6 +2,7 @@ import { FC } from "react";
 import BottomNav from "../components/shared/BottomNav";
 import BackButton from "../components/shared/BackButton";
 import { MdRestaurantMenu } from "react-icons/md";
+import MenuContainer from "../components/menu/MenuContainer";
 
 const Menu: FC = () => {
   return (
@@ -27,6 +28,7 @@ const Menu: FC = () => {
             </div>
           </div>
         </div>
+        <MenuContainer />
       </div>
       {/*RIGHT DIV */}
       <div className="flex-[1] bg-blue-500"></div>

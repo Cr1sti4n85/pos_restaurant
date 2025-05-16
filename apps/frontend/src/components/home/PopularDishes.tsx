@@ -13,7 +13,7 @@ export const PopularDishes: FC = () => {
             Ver todos
           </a>
         </div>
-        <div className="overflow-y-scroll h-[480px]">
+        <div className="scroll overflow-y-scroll h-[480px]">
           {popularDishes.map((dish) => (
             <div
               key={dish.id}

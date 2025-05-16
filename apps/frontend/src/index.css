@@ -3,3 +3,7 @@
 body {
   font-style: "Inter", sans-serif;
 }
+
+.scroll {
+  scrollbar-width: none;
+}
