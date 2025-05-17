@@ -39,7 +39,7 @@ const Tables: FC = () => {
         {tables?.map((table) => (
           <TableCard
             key={table.id}
-            name={table.name}
+            tableName={table.name}
             status={table.status}
             seats={table.seats}
             initials={table.initial}

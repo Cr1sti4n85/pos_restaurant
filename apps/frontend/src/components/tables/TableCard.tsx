@@ -1,28 +1,37 @@
 import { FC } from "react";
 import { getHexColor } from "../../utils/getBgColor";
 import { useNavigate } from "react-router";
+import { useClientStore } from "../../store/useClientStore";
 
 type TableCardProps = {
-  name: string;
+  tableName: string;
   status: string;
   seats: number;
   initials: string;
 };
 
-const TableCard: FC<TableCardProps> = ({ name, status, seats, initials }) => {
+const TableCard: FC<TableCardProps> = ({
+  tableName,
+  status,
+  seats,
+  initials,
+}) => {
   const navigate = useNavigate();
-  const handleClick = () => {
+  const { updateTable } = useClientStore();
+  const handleClick = (name: string) => {
+    console.log(name);
     if (status === "Reservada") return;
+    updateTable({ tableNo: name });
     navigate("/menu");
   };
 
   return (
     <div
-      onClick={handleClick}
+      onClick={() => handleClick(tableName)}
       className="w-[300px] bg-[#262626] hover:bg-[#2c2c2c] p-4 rounded-lg cursor-pointer"
     >
       <div className="flex items-center justify-between px-1">
-        <h1 className="text-[#f5f5f5] text-xl font-semibold">{name}</h1>
+        <h1 className="text-[#f5f5f5] text-xl font-semibold">{tableName}</h1>
         <p
           className={`${
             status === "Reservada"

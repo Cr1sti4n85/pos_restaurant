@@ -5,12 +5,17 @@ import { CiCircleMore } from "react-icons/ci";
 import { FaHome } from "react-icons/fa";
 import { MdOutlineReorder, MdTableBar } from "react-icons/md";
 import Modal from "./Modal";
+import { useClientStore } from "../../store/useClientStore";
 
 const BottomNav: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { setCustomer } = useClientStore();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [guestCount, setGuestCount] = useState<number>(0);
+  const [name, setName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+
   const openModal = (): void => setIsModalOpen(true);
   const closeModal = (): void => setIsModalOpen(false);
 
@@ -24,6 +29,12 @@ const BottomNav: FC = () => {
   };
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleCreateOrder = () => {
+    setCustomer({ name, phone, guests: guestCount });
+    closeModal();
+    navigate("/tables");
+  };
 
   return (
     <div
@@ -73,6 +84,8 @@ const BottomNav: FC = () => {
           </label>
           <div className="flex items-center rounded-lg p-3 px-4 bg-[#1f1f1f]">
             <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               name=""
               placeholder="Ingresa el nombre del cliente"
@@ -86,6 +99,8 @@ const BottomNav: FC = () => {
           </label>
           <div className="flex items-center rounded-lg p-3 px-4 bg-[#1f1f1f]">
             <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               type="number"
               name=""
               placeholder="+56988776655"
@@ -111,7 +126,7 @@ const BottomNav: FC = () => {
           </div>
         </div>
         <button
-          onClick={() => navigate("/tables")}
+          onClick={handleCreateOrder}
           className="w-full bg-[#f6B100] text-[#f5f5f5] 
         rounded-lg py-3 mt-8 hover:bg-yellow-700"
         >
