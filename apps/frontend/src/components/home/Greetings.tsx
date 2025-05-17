@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from "react";
+import { formatDate, formatTime } from "../../utils/formatDateTime";
 
 const Greetings: FC = () => {
   const [dateTime, setDatetime] = useState<Date>(new Date());
@@ -7,29 +8,6 @@ const Greetings: FC = () => {
     const timer = setInterval(() => setDatetime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
-
-  const formatDate = (date: Date) => {
-    const months: string[] = [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ];
-
-    return `${months[date.getMonth()]} ${String(date.getDate()).padStart(2, "0")} ${date.getFullYear()}`;
-  };
-
-  const formatTime = (date: Date) => {
-    return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
-  };
 
   return (
     <div className="flex justify-between items-center px-8 mt-5">

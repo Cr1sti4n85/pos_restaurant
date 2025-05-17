@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useClientStore } from "../../store/useClientStore";
 import { getInitials } from "../../utils/getInitials";
+import { formatDate } from "../../utils/formatDateTime";
 
 const CustomerInfo: FC = () => {
   const { name, orderId } = useClientStore();
@@ -15,7 +16,7 @@ const CustomerInfo: FC = () => {
           #{orderId} / Para servir
         </p>
         <p className="text-sx text-[#ababab] font-medium mt-2">
-          Junio 2025, 14:00 PM
+          {formatDate(new Date())}
         </p>
       </div>
       <button className="bg-[#f6b100] p-3 text-xl font-bold rounded-lg">
