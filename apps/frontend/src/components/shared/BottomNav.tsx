@@ -32,6 +32,9 @@ const BottomNav: FC = () => {
 
   const handleCreateOrder = () => {
     setCustomer({ name, phone, guests: guestCount });
+    localStorage.setItem("name", name);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("guests", guestCount.toString());
     closeModal();
     navigate("/tables");
   };

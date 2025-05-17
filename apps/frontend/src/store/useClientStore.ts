@@ -16,19 +16,21 @@ interface ClientStore extends ClientData {
 }
 
 export const useClientStore = create<ClientStore>((set) => ({
-  name: "",
-  phone: "",
-  guests: 0,
-  tableNo: "",
-  orderId: "",
+  name: localStorage.getItem("name") || "",
+  phone: localStorage.getItem("phone") || "",
+  guests: Number(localStorage.getItem("guests")) || 0,
+  tableNo: localStorage.getItem("tableNo") || "",
+  orderId: localStorage.getItem("orderId") || "",
 
-  setCustomer: ({ name, phone, guests, tableNo }) => {
+  setCustomer: ({ name, phone, guests }) => {
+    const orderId = nanoid(10);
+    localStorage.setItem("orderId", orderId);
+    localStorage.setItem("tableNo", "N/A");
     set({
       name,
       phone,
       guests,
-      tableNo,
-      orderId: nanoid(10),
+      orderId,
     });
   },
 

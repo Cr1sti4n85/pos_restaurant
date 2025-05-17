@@ -21,6 +21,7 @@ const TableCard: FC<TableCardProps> = ({
   const handleClick = (name: string) => {
     if (status === "Reservada") return;
     updateTable({ tableNo: name });
+    localStorage.setItem("tableNo", name);
     navigate("/menu");
   };
 
