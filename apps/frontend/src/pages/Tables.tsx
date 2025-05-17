@@ -41,6 +41,7 @@ const Tables: FC = () => {
             key={table.id}
             name={table.name}
             status={table.status}
+            seats={table.seats}
             initials={table.initial}
           />
         ))}

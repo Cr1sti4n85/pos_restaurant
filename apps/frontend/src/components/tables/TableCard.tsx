@@ -1,14 +1,15 @@
 import { FC } from "react";
-import { getBgColor } from "../../utils/getBgColor";
+import { getHexColor } from "../../utils/getBgColor";
 import { useNavigate } from "react-router";
 
 type TableCardProps = {
   name: string;
   status: string;
+  seats: number;
   initials: string;
 };
 
-const TableCard: FC<TableCardProps> = ({ name, status, initials }) => {
+const TableCard: FC<TableCardProps> = ({ name, status, seats, initials }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     if (status === "Reservada") return;
@@ -33,11 +34,16 @@ const TableCard: FC<TableCardProps> = ({ name, status, initials }) => {
         </p>
       </div>
       <div className="flex items-center justify-center mt-5 mb-7">
-        {/* <h1 className="bg-[#025cca] text-white rounded-full p-5 text-xl"> */}
-        <h1 className={`${getBgColor()} text-white rounded-full p-5 text-xl`}>
+        <h1
+          className=" text-white rounded-full p-5 text-xl"
+          style={{ backgroundColor: getHexColor() }}
+        >
           {initials}
         </h1>
       </div>
+      <p className="text-[#ababab] text-xs">
+        Asientos: <span className="text-[#f5f5f5]">{seats}</span>
+      </p>
     </div>
   );
 };
