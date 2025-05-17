@@ -19,7 +19,6 @@ const TableCard: FC<TableCardProps> = ({
   const navigate = useNavigate();
   const { updateTable } = useClientStore();
   const handleClick = (name: string) => {
-    console.log(name);
     if (status === "Reservada") return;
     updateTable({ tableNo: name });
     navigate("/menu");

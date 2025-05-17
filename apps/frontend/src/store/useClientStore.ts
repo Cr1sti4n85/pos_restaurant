@@ -1,10 +1,12 @@
 import { create } from "zustand";
+import { nanoid } from "nanoid";
 
 interface ClientData {
   name: string;
   phone: string;
   guests: number;
   tableNo: string;
+  orderId: string;
 }
 
 interface ClientStore extends ClientData {
@@ -18,6 +20,7 @@ export const useClientStore = create<ClientStore>((set) => ({
   phone: "",
   guests: 0,
   tableNo: "",
+  orderId: "",
 
   setCustomer: ({ name, phone, guests, tableNo }) => {
     set({
@@ -25,8 +28,8 @@ export const useClientStore = create<ClientStore>((set) => ({
       phone,
       guests,
       tableNo,
+      orderId: nanoid(10),
     });
-    console.log(name, phone, guests, tableNo);
   },
 
   removeCustomer: () => {

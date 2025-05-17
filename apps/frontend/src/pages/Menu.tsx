@@ -6,8 +6,11 @@ import MenuContainer from "../components/menu/MenuContainer";
 import CustomerInfo from "../components/menu/CustomerInfo";
 import CartInfo from "../components/menu/CartInfo";
 import Bill from "../components/menu/Bill";
+import { useClientStore } from "../store/useClientStore";
 
 const Menu: FC = () => {
+  const { name, tableNo } = useClientStore();
+
   return (
     <section className="bg-[#1f1f1f] flex gap-3 h-[calc(100vh-5.75rem)] overflow-hidden">
       {/*LEFT DIV */}
@@ -23,10 +26,8 @@ const Menu: FC = () => {
             <div className="flex items-center gap-3 cursor-pointer">
               <MdRestaurantMenu className="text-[#f5f5f5] text-4xl" />
               <div className="flex flex-col items-start">
-                <h1 className="text-md text-[#f5f5f5] font-semibold">
-                  Nombre del cliente
-                </h1>
-                <p className="text-xs text-[#ababab] font-medium">Mesa N° 2</p>
+                <h1 className="text-md text-[#f5f5f5] font-semibold">{name}</h1>
+                <p className="text-xs text-[#ababab] font-medium">{tableNo}</p>
               </div>
             </div>
           </div>
