@@ -59,4 +59,5 @@ export interface CartStore {
   cart: ICartData[];
   addItems: (item: ICartData) => void;
   removeItems: (id: string) => void;
+  getTotalPrice: () => number;
 }

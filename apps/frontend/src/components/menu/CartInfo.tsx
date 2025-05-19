@@ -1,10 +1,21 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { FaNotesMedical } from "react-icons/fa";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useCartStore } from "../../store/useCartStore";
 
 const CartInfo: FC = () => {
   const { cart, removeItems } = useCartStore();
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [cart]);
 
   const handleRemove = (id: string) => {
     removeItems(id);
@@ -15,7 +26,7 @@ const CartInfo: FC = () => {
       <h1 className="text-[#e4e4e4] text-lg font-semibold tracking-wide">
         Detalle de la orden
       </h1>
-      <div className="scroll mt-4 overflow-y-scroll h-[150px]">
+      <div className="scroll mt-4 overflow-y-scroll h-[150px]" ref={scrollRef}>
         {cart.length === 0 ? (
           <p
             className="text-[#ababab] text-sm flex justify-center 

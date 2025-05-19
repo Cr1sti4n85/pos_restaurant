@@ -26,4 +26,9 @@ export const useCartStore = create<CartStore>((set, get) => ({
       };
     });
   },
+
+  getTotalPrice: () => {
+    const { cart } = get();
+    return cart.reduce((total, item) => total + item.price, 0);
+  },
 }));
