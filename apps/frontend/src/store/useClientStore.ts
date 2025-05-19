@@ -1,19 +1,6 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
-
-interface ClientData {
-  name: string;
-  phone: string;
-  guests: number;
-  tableNo: string;
-  orderId: string;
-}
-
-interface ClientStore extends ClientData {
-  setCustomer: (customer: Partial<ClientData>) => void;
-  removeCustomer: () => void;
-  updateTable: (data: Partial<Pick<ClientData, "tableNo">>) => void;
-}
+import { ClientStore } from "../types";
 
 export const useClientStore = create<ClientStore>((set) => ({
   name: localStorage.getItem("name") || "",

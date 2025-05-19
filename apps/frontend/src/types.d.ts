@@ -27,9 +27,40 @@ export interface Menus {
   name: string;
   bgColor: string;
   icon: string;
-  items: MenunItems[];
+  items: MenuItems[];
 }
 
 export type SelectedMenuProps = {
   menu: MenuItems;
 };
+
+//ClientStore
+
+interface IClientData {
+  name: string;
+  phone: string;
+  guests: number;
+  tableNo: string;
+  orderId: string;
+}
+
+export interface ClientStore extends IClientData {
+  setCustomer: (customer: Partial<IClientData>) => void;
+  removeCustomer: () => void;
+  updateTable: (data: Partial<Pick<IClientData, "tableNo">>) => void;
+}
+
+//Cart
+interface ICartData {
+  id: string;
+  itemName: string;
+  pricePerQuantity: number;
+  quantity: number;
+  price: number;
+}
+
+export interface CartStore {
+  cart: ICartData[];
+  addItems: (item: ICartData) => void;
+  removeItems: (id: Partial<Pick<ICartData, "id">>) => void;
+}

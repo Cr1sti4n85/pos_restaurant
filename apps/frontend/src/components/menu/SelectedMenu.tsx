@@ -1,9 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { SelectedMenuProps } from "../../types";
 import { FaShoppingCart } from "react-icons/fa";
+import { useCartStore } from "../../store/useCartStore";
 
 const SelectedMenu: FC<SelectedMenuProps> = ({ menu }) => {
   const [itemCount, setItemCount] = useState<number>(0);
+
+  const { addItems } = useCartStore();
 
   useEffect(() => {
     setItemCount(0);
@@ -17,6 +20,21 @@ const SelectedMenu: FC<SelectedMenuProps> = ({ menu }) => {
     if (itemCount <= 0) return;
     setItemCount(itemCount - 1);
   };
+
+  const handleAddToCart = ({ menu }: SelectedMenuProps) => {
+    if (itemCount === 0) return;
+    const { name, price } = menu;
+    const id = new Date();
+    addItems({
+      id: id.toString(),
+      itemName: name,
+      pricePerQuantity: price,
+      quantity: itemCount,
+      price: price * itemCount,
+    });
+    setItemCount(0);
+  };
+
   return (
     <div
       key={menu.id}
@@ -25,7 +43,10 @@ const SelectedMenu: FC<SelectedMenuProps> = ({ menu }) => {
     >
       <div className="flex items-start justify-between w-full">
         <h1 className="text-[#f5f5f5] text-lg font-semibold">{menu.name}</h1>
-        <button className="bg-[#2e4a40] text-[#02ca3a] p-2 rounded-lg cursor-pointer">
+        <button
+          onClick={() => handleAddToCart({ menu })}
+          className="bg-[#2e4a40] text-[#02ca3a] p-2 rounded-lg cursor-pointer"
+        >
           <FaShoppingCart size={20} />
         </button>
       </div>
