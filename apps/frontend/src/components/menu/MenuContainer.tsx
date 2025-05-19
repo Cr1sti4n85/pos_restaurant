@@ -38,7 +38,13 @@ const MenuContainer = () => {
       <div>
         <div className="grid grid-cols-4 gap-4 px-10 py-4 w-[100%]">
           {selected?.items.map((menu) => (
-            <SelectedMenu key={menu.id} menu={menu} />
+            <SelectedMenu
+              key={menu.id}
+              id={menu.id}
+              name={menu.name}
+              price={menu.price}
+              category={menu.category}
+            />
           ))}
         </div>
       </div>

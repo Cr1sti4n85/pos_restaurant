@@ -30,10 +30,6 @@ export interface Menus {
   items: MenuItems[];
 }
 
-export type SelectedMenuProps = {
-  menu: MenuItems;
-};
-
 //ClientStore
 
 interface IClientData {
@@ -62,5 +58,5 @@ interface ICartData {
 export interface CartStore {
   cart: ICartData[];
   addItems: (item: ICartData) => void;
-  removeItems: (id: Partial<Pick<ICartData, "id">>) => void;
+  removeItems: (id: string) => void;
 }

@@ -4,7 +4,11 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useCartStore } from "../../store/useCartStore";
 
 const CartInfo: FC = () => {
-  const { cart } = useCartStore();
+  const { cart, removeItems } = useCartStore();
+
+  const handleRemove = (id: string) => {
+    removeItems(id);
+  };
 
   return (
     <div className="px-4 py-2">
@@ -34,6 +38,7 @@ const CartInfo: FC = () => {
               <div className="flex items-center justify-between mt-3">
                 <div className="flex items-center gap-3">
                   <RiDeleteBin2Fill
+                    onClick={() => handleRemove(item.id)}
                     className="text-[#ababab] cursor-pointer"
                     size={20}
                   />
