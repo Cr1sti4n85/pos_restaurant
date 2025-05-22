@@ -46,6 +46,8 @@ export class AuthService {
       expiresIn: `${this.configService.getOrThrow<string>('JWT_REFRESH_EXPIRATION_MS')}ms`,
     });
 
+    const REFRESH_PATH = '/api/auth/refresh';
+
     res
       .cookie('authentication', accessToken, {
         httpOnly: true,
@@ -58,6 +60,7 @@ export class AuthService {
         secure:
           this.configService.getOrThrow<string>('NODE_ENV') === 'production',
         expires: expiresRefreshToken,
+        path: REFRESH_PATH,
       });
   }
 

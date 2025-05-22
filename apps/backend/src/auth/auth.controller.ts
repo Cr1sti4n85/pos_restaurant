@@ -4,6 +4,7 @@ import { LocalAuthGuard } from './guards/local.auth.guard';
 import { CurrentUser } from '../common/current-user.decorator';
 import { User } from '../user/entity/user.entity';
 import { Response } from 'express';
+import { JwtRefreshAuthGuard } from './guards/jwt.refresh.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -16,5 +17,14 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     return this.authService.login(user, res);
+  }
+
+  @Post('refresh')
+  @UseGuards(JwtRefreshAuthGuard)
+  async refreshToken(
+    @CurrentUser() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.authService.login(user, res);
   }
 }
