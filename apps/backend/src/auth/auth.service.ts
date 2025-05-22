@@ -33,7 +33,7 @@ export class AuthService {
     );
 
     const tokenPayload: TokenPayload = {
-      userId: user._id.toHexString(),
+      userId: user._id.toString(),
     };
 
     const accessToken = this.jwtService.sign(tokenPayload, {
@@ -60,7 +60,7 @@ export class AuthService {
         secure:
           this.configService.getOrThrow<string>('NODE_ENV') === 'production',
         expires: expiresRefreshToken,
-        path: REFRESH_PATH,
+        // path: REFRESH_PATH,
       });
   }
 

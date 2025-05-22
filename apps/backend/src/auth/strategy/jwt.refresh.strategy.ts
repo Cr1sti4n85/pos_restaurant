@@ -4,7 +4,6 @@ import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { TokenPayload } from '../types/token-payload';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from '../auth.service';
 import { UserService } from '../../user/user.service';
 
 @Injectable()
@@ -14,15 +13,15 @@ export class JwtRefreshStrategy extends PassportStrategy(
 ) {
   constructor(
     configService: ConfigService,
-    private readonly authService: AuthService,
     private readonly userService: UserService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => request.cookies?.refresh,
+        (request: Request) => {
+          return request.cookies?.refresh;
+        },
       ]),
       secretOrKey: configService.getOrThrow('JWT_REFRESH_SECRET'),
-      passReqToCallback: true,
     });
   }
 

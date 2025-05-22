@@ -7,14 +7,17 @@ import { Request } from 'express';
 import { TokenPayload } from '../types/token-payload';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
     configService: ConfigService,
     private readonly usersService: UserService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => request.cookies?.authentication,
+        (request: Request) => {
+          console.log(request.cookies?.authentication);
+          return request.cookies?.authentication;
+        },
       ]),
       secretOrKey: configService.getOrThrow('JWT_ACCESS_SECRET'),
     });
