@@ -5,12 +5,14 @@ import { Response } from 'express';
 import { User } from 'src/user/entity/user.entity';
 import { UserService } from 'src/user/user.service';
 import { TokenPayload } from './types/token-payload';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async login(user: User, res: Response) {
@@ -33,6 +35,30 @@ export class AuthService {
     const tokenPayload: TokenPayload = {
       userId: user._id.toHexString(),
     };
+
+    const accessToken = this.jwtService.sign(tokenPayload, {
+      secret: this.configService.getOrThrow<string>('JWT_ACCESS_SECRET'),
+      expiresIn: `${this.configService.getOrThrow<string>('JWT_ACCESS_EXPIRATION_MS')}ms`,
+    });
+
+    const refreshToken = this.jwtService.sign(tokenPayload, {
+      secret: this.configService.getOrThrow<string>('JWT_REFRESH_SECRET'),
+      expiresIn: `${this.configService.getOrThrow<string>('JWT_REFRESH_EXPIRATION_MS')}ms`,
+    });
+
+    res
+      .cookie('authentication', accessToken, {
+        httpOnly: true,
+        secure:
+          this.configService.getOrThrow<string>('NODE_ENV') === 'production',
+        expires: expiresAccessToken,
+      })
+      .cookie('refresh', refreshToken, {
+        httpOnly: true,
+        secure:
+          this.configService.getOrThrow<string>('NODE_ENV') === 'production',
+        expires: expiresRefreshToken,
+      });
   }
 
   async verifyUser(email: string, password: string): Promise<User> {
