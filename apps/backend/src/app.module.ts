@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { APP_PIPE } from '@nestjs/core';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { APP_PIPE } from '@nestjs/core';
     }),
     AuthModule,
     UserModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [
