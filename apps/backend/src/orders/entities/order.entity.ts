@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { OrderStatus } from '../types/order.types';
 
 @Schema()
 class Customer {
@@ -42,7 +43,7 @@ export class Order {
   customer: Customer;
 
   @Prop({ required: true, type: String })
-  orderStatus: string;
+  orderStatus: OrderStatus;
 
   @Prop({ type: Date, default: Date.now() })
   orderDate: Date;
