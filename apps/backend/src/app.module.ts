@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { APP_PIPE } from '@nestjs/core';
 import { OrdersModule } from './orders/orders.module';
+import { TablesModule } from './tables/tables.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { OrdersModule } from './orders/orders.module';
     AuthModule,
     UserModule,
     OrdersModule,
+    TablesModule,
   ],
   controllers: [AppController],
   providers: [

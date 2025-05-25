@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { OrderStatus } from '../types/order.types';
+import mongoose, { Types } from 'mongoose';
 
 @Schema()
 class Customer {
@@ -47,6 +48,9 @@ export class Order {
 
   @Prop({ type: Date, default: Date.now() })
   orderDate: Date;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Table' })
+  table: Types.ObjectId;
 
   @Prop({ required: true })
   items: Item[];
