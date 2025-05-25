@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Orders from "./pages/Orders";
@@ -8,9 +8,12 @@ import Tables from "./pages/Tables";
 import Menu from "./pages/Menu";
 
 function App() {
+  const location = useLocation();
+  const hideHeader = ["/auth"];
+
   return (
     <>
-      <Header />
+      {!hideHeader.includes(location.pathname) && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />

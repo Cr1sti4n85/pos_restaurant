@@ -61,3 +61,20 @@ export interface CartStore {
   removeItems: (id: string) => void;
   getTotalPrice: () => number;
 }
+
+//Employees
+export enum EmployeeRole {
+  WAITER = "mesero",
+  CASHIER = "cajero",
+}
+
+interface ILoginEmployee {
+  email: string;
+  password: string;
+}
+
+interface IRegisterEmployee extends ILoginEmployee {
+  name: string;
+  phone: string;
+  role: EmployeeRole | "";
+}
