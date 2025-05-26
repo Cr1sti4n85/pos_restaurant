@@ -15,3 +15,5 @@ export const getUserData = async (): Promise<IRegisterEmployee> => {
   const response = await API.get<IRegisterEmployee>("/users/profile");
   return response.data;
 };
+
+export const logout = async (): Promise<void> => API.get("/auth/logout");

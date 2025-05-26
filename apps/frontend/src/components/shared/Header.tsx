@@ -1,7 +1,16 @@
 import { FaSearch, FaUserCircle, FaBell } from "react-icons/fa";
 import logo from "../../assets/imgs/logo.png";
+import { useUserStore } from "../../store/useUserStore";
+import { IoLogOut } from "react-icons/io5";
+import { useLogoutUser } from "../../hooks/user/useLogoutUser";
 
 const Header = () => {
+  const { name, role } = useUserStore();
+  const { signout } = useLogoutUser();
+  const handleLogout = () => {
+    signout();
+  };
+
   return (
     <header className="flex justify-between items-center py-4 px-8 bg-[#1a1a1a]">
       <div>
@@ -28,9 +37,18 @@ const Header = () => {
         <div className="flex items-center gap-3 cursor-pointer">
           <FaUserCircle className="text-[#f5f5f5] text-4xl" />
           <div className="flex flex-col items-start">
-            <h1 className="text-md text-[#f5f5f5] font-semibold">Cristian</h1>
-            <p className="text-xs text-[#ababab] font-medium">Admin</p>
+            <h1 className="text-md text-[#f5f5f5] font-semibold">
+              {name || "Anónimo"}
+            </h1>
+            <p className="text-xs text-[#ababab] font-medium">
+              {role || "N/A"}
+            </p>
           </div>
+          <IoLogOut
+            onClick={handleLogout}
+            className="text-[#f5f5f5] ml-2"
+            size={40}
+          />
         </div>
       </div>
     </header>

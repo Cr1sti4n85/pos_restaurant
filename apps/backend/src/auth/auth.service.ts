@@ -60,7 +60,7 @@ export class AuthService {
         secure:
           this.configService.getOrThrow<string>('NODE_ENV') === 'production',
         expires: expiresRefreshToken,
-        // path: REFRESH_PATH,
+        path: REFRESH_PATH,
       });
 
     return user;
@@ -79,5 +79,11 @@ export class AuthService {
     } catch (error) {
       throw new UnauthorizedException('Credenciales no válidas');
     }
+  }
+
+  async logout(user: User, res: Response) {
+    res
+      .clearCookie('authentication')
+      .clearCookie('refresh', { path: '/api/auth/refresh' });
   }
 }
