@@ -78,3 +78,18 @@ interface IRegisterEmployee extends ILoginEmployee {
   phone: string;
   role: EmployeeRole | "";
 }
+
+//UserStore
+export interface IUserData {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: EmployeeRole | "";
+  isAuth: boolean;
+}
+
+export interface UserStore extends IUserData {
+  setUser: (user: IUserData) => void;
+  removeUser: () => void;
+}

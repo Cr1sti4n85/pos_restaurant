@@ -62,6 +62,8 @@ export class AuthService {
         expires: expiresRefreshToken,
         // path: REFRESH_PATH,
       });
+
+    return user;
   }
 
   async verifyUser(email: string, password: string): Promise<User> {

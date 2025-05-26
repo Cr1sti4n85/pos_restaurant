@@ -1,11 +1,13 @@
 import { FC, useState } from "react";
 import { ILoginEmployee } from "../../types";
+import { useLoginUser } from "../../hooks/user/useLoginUser";
 
 const Login: FC = () => {
   const [formData, setFormData] = useState<ILoginEmployee>({
     email: "",
     password: "",
   });
+  const { signIn } = useLoginUser(formData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -13,6 +15,7 @@ const Login: FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    signIn();
   };
   return (
     <div>
