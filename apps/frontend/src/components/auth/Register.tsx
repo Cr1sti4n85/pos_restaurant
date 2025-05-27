@@ -1,7 +1,12 @@
 import { FC, useState } from "react";
 import { EmployeeRole, IRegisterEmployee } from "../../types";
+import { useRegisterUser } from "../../hooks/user/useRegisterUser";
 
-const Register: FC = () => {
+type registeredProps = {
+  setIsRegistered: (value: boolean) => void;
+};
+
+const Register: FC<registeredProps> = ({ setIsRegistered }) => {
   const [formData, setFormData] = useState<IRegisterEmployee>({
     name: "",
     email: "",
@@ -10,13 +15,18 @@ const Register: FC = () => {
     role: "",
   });
 
+  const { signUp } = useRegisterUser(formData, setFormData);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    signUp();
+    setTimeout(() => {
+      setIsRegistered(true);
+    }, 1500);
   };
 
   const handleRoleSelection = (selectedRole: EmployeeRole) => {

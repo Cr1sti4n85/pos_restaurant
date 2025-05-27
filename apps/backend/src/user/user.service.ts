@@ -14,7 +14,7 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async createUser(createUserDto: CreateUserDto) {
-    const { fullName, email, password, phone, role } = createUserDto;
+    const { name, email, password, phone, role } = createUserDto;
     //check if email is in use
     const emailInUse = await this.userModel.findOne({ email });
 
@@ -27,7 +27,7 @@ export class UserService {
 
     //create user
     const user = await this.userModel.create({
-      fullName,
+      name,
       email,
       password: hashedPassword,
       phone,

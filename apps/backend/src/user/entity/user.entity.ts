@@ -12,7 +12,7 @@ export class User {
     trim: true,
     unique: true,
   })
-  fullName: string;
+  name: string;
 
   @Prop({
     type: String,

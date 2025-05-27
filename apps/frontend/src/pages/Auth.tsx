@@ -46,13 +46,17 @@ const Auth: FC = () => {
         </div>
 
         <h2 className="text-4xl text-center mt-10 font-semibold text-yellow-400 mb-10">
-          {isRegistered
+          {!isRegistered
             ? "Registro de empleados"
             : "Inicio de Sesión de empleados"}
         </h2>
 
         {/* Components */}
-        {isRegistered ? <Register /> : <Login />}
+        {!isRegistered ? (
+          <Register setIsRegistered={setIsRegistered} />
+        ) : (
+          <Login />
+        )}
 
         <div className="flex justify-center mt-6">
           <p className="text-sm text-[#ababab]">
@@ -62,7 +66,7 @@ const Auth: FC = () => {
               className="text-yellow-400 font-semibold hover:underline"
               href="#"
             >
-              {isRegistered ? "Inicia Sesión" : "Registrate"}
+              {!isRegistered ? "Inicia Sesión" : "Registrate"}
             </a>
           </p>
         </div>
