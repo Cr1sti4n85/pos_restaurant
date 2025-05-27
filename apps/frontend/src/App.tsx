@@ -6,6 +6,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Header from "./components/shared/Header";
 import Tables from "./pages/Tables";
 import Menu from "./pages/Menu";
+import ProtectedRoutes from "./components/auth/ProtectedRoute";
 
 function App() {
   const location = useLocation();
@@ -15,11 +16,39 @@ function App() {
     <>
       {!hideHeader.includes(location.pathname) && <Header />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoutes>
+              <Home />
+            </ProtectedRoutes>
+          }
+        />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/tables" element={<Tables />} />
-        <Route path="/menu" element={<Menu />} />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoutes>
+              <Orders />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/tables"
+          element={
+            <ProtectedRoutes>
+              <Tables />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/menu"
+          element={
+            <ProtectedRoutes>
+              <Menu />
+            </ProtectedRoutes>
+          }
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

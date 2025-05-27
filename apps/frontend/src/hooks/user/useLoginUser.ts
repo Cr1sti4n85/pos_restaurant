@@ -13,10 +13,10 @@ export const useLoginUser = (user: ILoginEmployee) => {
   const { mutate: signIn, ...rest } = useMutation({
     mutationFn: () => login(user),
     onSuccess: ({ data }) => {
-      const { _id, fullName, email, phone, role } = data;
+      const { _id, name, email, phone, role } = data;
       setUser({
         _id,
-        name: fullName,
+        name,
         email,
         phone,
         role,
