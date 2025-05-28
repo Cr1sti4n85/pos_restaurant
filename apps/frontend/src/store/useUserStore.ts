@@ -1,14 +1,17 @@
 import { create } from "zustand";
-import { UserStore } from "../types";
+import { EmployeeRole, UserStore } from "../types";
 
 export const useUserStore = create<UserStore>((set) => ({
   _id: "",
-  name: "",
-  email: "",
-  phone: "",
-  role: "",
-  isAuth: false,
+  name: localStorage.getItem("userName") || "",
+  email: localStorage.getItem("userEmail") || "",
+  phone: localStorage.getItem("userPhone") || "",
+  role: (localStorage.getItem("userRole") as EmployeeRole) || "",
   setUser: (user) => {
+    localStorage.setItem("userName", user.name);
+    localStorage.setItem("userEmail", user.email);
+    localStorage.setItem("userPhone", user.phone);
+    localStorage.setItem("userRole", user.role);
     set({ ...user });
   },
 
@@ -19,7 +22,6 @@ export const useUserStore = create<UserStore>((set) => ({
       phone: "",
       role: "",
       email: "",
-      isAuth: false,
     });
   },
 }));

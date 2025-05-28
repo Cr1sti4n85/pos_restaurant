@@ -86,7 +86,6 @@ export interface IUserData {
   email: string;
   phone: string;
   role: EmployeeRole | "";
-  isAuth: boolean;
 }
 
 export interface UserStore extends IUserData {

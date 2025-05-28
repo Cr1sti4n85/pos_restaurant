@@ -20,7 +20,6 @@ export const useLoginUser = (user: ILoginEmployee) => {
         email,
         phone,
         role,
-        isAuth: true,
       });
       navigate("/", { replace: true });
       enqueueSnackbar("Sesión iniciada", { variant: "success" });

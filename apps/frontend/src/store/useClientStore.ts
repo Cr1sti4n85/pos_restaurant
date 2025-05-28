@@ -3,8 +3,8 @@ import { nanoid } from "nanoid";
 import { ClientStore } from "../types";
 
 export const useClientStore = create<ClientStore>((set) => ({
-  name: localStorage.getItem("name") || "",
-  phone: localStorage.getItem("phone") || "",
+  name: localStorage.getItem("clientName") || "",
+  phone: localStorage.getItem("clientPhone") || "",
   guests: Number(localStorage.getItem("guests")) || 0,
   tableNo: localStorage.getItem("tableNo") || "",
   orderId: localStorage.getItem("orderId") || "",
@@ -13,6 +13,7 @@ export const useClientStore = create<ClientStore>((set) => ({
     const orderId = nanoid(10);
     localStorage.setItem("orderId", orderId);
     localStorage.setItem("tableNo", "N/A");
+
     set({
       name,
       phone,
