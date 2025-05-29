@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { IconType } from "react-icons/lib";
 
 export type MiniCardProps = {
   title: string;
@@ -64,6 +65,7 @@ export interface CartStore {
 
 //Employees
 export enum EmployeeRole {
+  ADMIN = "admin",
   WAITER = "mesero",
   CASHIER = "cajero",
 }
@@ -85,10 +87,27 @@ export interface IUserData {
   name: string;
   email: string;
   phone: string;
-  role: EmployeeRole | "";
 }
 
 export interface UserStore extends IUserData {
   setUser: (user: IUserData) => void;
   removeUser: () => void;
+}
+
+export interface IAuthUser extends IUserData {
+  role: EmployeeRole;
+}
+
+//buttons and tabs for dashboard
+
+export type Buttons = {
+  label: string;
+  icon: ReactElement<IconType>;
+  action: string;
+};
+
+export enum Tabs {
+  Metrics = "Métricas",
+  Orders = "Órdenes",
+  Payment = "Pago",
 }

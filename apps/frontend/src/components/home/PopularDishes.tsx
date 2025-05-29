@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { popularDishes } from "../../constants/pos_constants";
+import { popularDishes } from "../../constants/dishes";
 
 export const PopularDishes: FC = () => {
   return (

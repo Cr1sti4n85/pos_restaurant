@@ -7,6 +7,7 @@ import Header from "./components/shared/Header";
 import Tables from "./pages/Tables";
 import Menu from "./pages/Menu";
 import ProtectedRoutes from "./components/auth/ProtectedRoute";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const location = useLocation();
@@ -46,6 +47,14 @@ function App() {
           element={
             <ProtectedRoutes>
               <Menu />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoutes>
+              <Dashboard />
             </ProtectedRoutes>
           }
         />

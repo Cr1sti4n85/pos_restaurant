@@ -1,11 +1,16 @@
 import { FaSearch, FaUserCircle, FaBell } from "react-icons/fa";
 import logo from "../../assets/imgs/logo.png";
-import { useUserStore } from "../../store/useUserStore";
 import { IoLogOut } from "react-icons/io5";
 import { useLogoutUser } from "../../hooks/user/useLogoutUser";
+import { MdDashboard } from "react-icons/md";
+import { EmployeeRole } from "../../types.d";
+import useAuth from "../../hooks/user/useAuth";
+import { useNavigate } from "react-router";
 
 const Header = () => {
-  const { name, role } = useUserStore();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   const { signout } = useLogoutUser();
   const handleLogout = () => {
     signout();
@@ -31,6 +36,15 @@ const Header = () => {
       </div>
       {/*logged user details */}
       <div className="flex items-center gap-4">
+        {user && user.role === EmployeeRole.ADMIN && (
+          <div
+            onClick={() => navigate("/dashboard")}
+            className="bg-[#1f1f1f] rounded-[15px] p-3 cursor-pointer"
+          >
+            <MdDashboard className="text-[#f5f5f5] text-2xl" />
+          </div>
+        )}
+
         <div className="bg-[#1f1f1f] rounded-[15px] p-3 cursor-pointer">
           <FaBell className="text-[#f5f5f5] text-2xl" />
         </div>
@@ -38,10 +52,10 @@ const Header = () => {
           <FaUserCircle className="text-[#f5f5f5] text-4xl" />
           <div className="flex flex-col items-start">
             <h1 className="text-md text-[#f5f5f5] font-semibold">
-              {name || "Anónimo"}
+              {(user && user.name) || "Anónimo"}
             </h1>
             <p className="text-xs text-[#ababab] font-medium">
-              {role || "N/A"}
+              {(user && user.role) || "N/A"}
             </p>
           </div>
           <IoLogOut

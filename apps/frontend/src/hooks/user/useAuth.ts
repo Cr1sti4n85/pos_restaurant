@@ -1,9 +1,9 @@
 import { QueryOptions, useQuery } from "@tanstack/react-query";
 import { getUserData } from "../../http/apiRequests";
-import { IUserData } from "../../types";
+import { IAuthUser } from "../../types";
 
-const useAuth = (opts: QueryOptions<IUserData> = {}) => {
-  const { data: user, ...rest } = useQuery<IUserData>({
+const useAuth = (opts: QueryOptions<IAuthUser> = {}) => {
+  const { data: user, ...rest } = useQuery<IAuthUser>({
     queryKey: ["auth"],
     queryFn: getUserData,
     staleTime: Infinity,
