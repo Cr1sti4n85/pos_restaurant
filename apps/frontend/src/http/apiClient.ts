@@ -32,7 +32,7 @@ API.interceptors.response.use(
     //try to refresh access token
     if (status === 401 && data?.message === "invalid_access_token") {
       try {
-        await TokenRefreshClient.get("/auth/refresh");
+        await TokenRefreshClient.post("/auth/refresh");
         if (config) {
           return TokenRefreshClient(config);
         }
