@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { ITableData } from "../../types";
+import { IAddTableData } from "../../types";
 import { addTable } from "../../http/apiRequests";
 import { enqueueSnackbar } from "notistack";
 
-export const useAddTable = (table: ITableData) => {
+export const useAddTable = (table: IAddTableData) => {
   const { mutate: createTable, ...rest } = useMutation({
     mutationFn: () => addTable(table),
     onSuccess: () => {

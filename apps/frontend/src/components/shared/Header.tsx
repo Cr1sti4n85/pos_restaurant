@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center py-4 px-8 bg-[#1a1a1a]">
-      <div>
+      <div className="cursor-pointer" onClick={() => navigate("/")}>
         <img src={logo} alt="logo" className="h-8 w-8" />
         <h1 className="text-lg font-semibold text-[#f5f5f5]">Restro</h1>
       </div>

@@ -15,7 +15,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { ParseObjectIdPipe } from '@nestjs/mongoose';
 
 @Controller('orders')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 

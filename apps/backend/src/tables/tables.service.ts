@@ -8,6 +8,7 @@ import { UpdateTableDto } from './dto/update-table.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Table } from './entities/table.entity';
 import { Model, Types } from 'mongoose';
+import { Order } from 'src/orders/entities/order.entity';
 
 @Injectable()
 export class TablesService {
@@ -31,7 +32,14 @@ export class TablesService {
   }
 
   findAll() {
-    return this.tableModel.find().exec();
+    return this.tableModel
+      .find()
+      .populate({
+        path: 'currentOrder',
+        model: Order.name,
+        select: 'customer',
+      })
+      .exec();
   }
 
   async findOne(id: Types.ObjectId) {

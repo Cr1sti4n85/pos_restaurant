@@ -118,7 +118,23 @@ export type DashboardModalProps = {
   setIsTableModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export interface ITableData {
+export interface IAddTableData {
   tableNo: string;
   seats: string;
+}
+
+interface CurrentOrder {
+  _id: string;
+  customer: {
+    _id: string;
+    guests: number;
+    name: string;
+    phone: string;
+  };
+}
+
+export interface ITableData extends IAddTableData {
+  _id: string;
+  status: string;
+  currentOrder: CurrentOrder;
 }

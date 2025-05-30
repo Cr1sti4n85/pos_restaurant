@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import API from "./apiClient";
 import {
+  IAddTableData,
   IAuthUser,
   ILoginEmployee,
   IRegisterEmployee,
@@ -25,5 +26,10 @@ export const logout = async (): Promise<void> => API.get("/auth/logout");
 
 //Table requests
 
-export const addTable = async (data: ITableData): Promise<AxiosResponse> =>
-  API.post<ITableData>("/tables", data);
+export const addTable = async (data: IAddTableData): Promise<AxiosResponse> =>
+  API.post<IAddTableData>("/tables", data);
+
+export const getTables = async (): Promise<ITableData[]> => {
+  const response = await API.get<ITableData[]>("/tables");
+  return response.data;
+};

@@ -2,10 +2,17 @@ import { FC, useState } from "react";
 import BackButton from "../components/shared/BackButton";
 import BottomNav from "../components/shared/BottomNav";
 import TableCard from "../components/tables/TableCard";
-import { tables } from "../constants/tables";
+import useTables from "../hooks/table/useTables";
+import { enqueueSnackbar } from "notistack";
 
 const Tables: FC = () => {
   const [status, setStatus] = useState<string>("all");
+
+  const { tablesData, isError } = useTables();
+
+  if (isError) {
+    enqueueSnackbar("Ocurrió un error", { variant: "error" });
+  }
 
   return (
     <section className="bg-[#1f1f1f] h-[calc(100vh-5rem)] overflow-hidden">
@@ -35,14 +42,14 @@ const Tables: FC = () => {
           </button>
         </div>
       </div>
-      <div className="scroll flex flex-wrap gap-5 px-10 py-5 overflow-y-scroll h-[700px]">
-        {tables?.map((table) => (
+      <div className="scroll flex flex-wrap gap-5 px-10 py-5 overflow-y-scroll h-[500px]">
+        {tablesData?.map((table) => (
           <TableCard
-            key={table.id}
-            tableName={table.name}
+            key={table._id}
+            tableName={table.tableNo}
             status={table.status}
-            seats={table.seats}
-            initials={table.initial}
+            seats={+table.seats}
+            name={table.currentOrder?.customer.name}
           />
         ))}
       </div>
