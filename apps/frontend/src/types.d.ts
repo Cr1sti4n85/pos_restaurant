@@ -111,3 +111,14 @@ export enum Tabs {
   Orders = "Órdenes",
   Payment = "Pago",
 }
+
+//Dashboard modal
+
+export type DashboardModalProps = {
+  setIsTableModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export interface ITableData {
+  tableNo: string;
+  seats: string;
+}

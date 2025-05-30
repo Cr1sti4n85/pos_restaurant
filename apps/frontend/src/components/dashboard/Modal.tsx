@@ -1,13 +1,30 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
+import { DashboardModalProps, ITableData } from "../../types";
+import { useAddTable } from "../../hooks/table/useAddTable";
 
-type ModalProps = {
-  setIsTableModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const Modal: FC<ModalProps> = ({ setIsTableModalOpen }) => {
+const Modal: FC<DashboardModalProps> = ({ setIsTableModalOpen }) => {
+  const [tableData, setTableData] = useState<ITableData>({
+    tableNo: "",
+    seats: "",
+  });
+  const { createTable } = useAddTable(tableData);
   const handleCloseModal = () => {
+    setIsTableModalOpen(false);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTableData((prevData) => ({
+      ...prevData,
+      [name]: +value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    createTable();
     setIsTableModalOpen(false);
   };
 
@@ -40,7 +57,7 @@ const Modal: FC<ModalProps> = ({ setIsTableModalOpen }) => {
 
         {/*Modal body */}
 
-        <form className="space-y-4 mt-10">
+        <form className="space-y-4 mt-10" onSubmit={handleSubmit}>
           <div>
             <label className="block text-[#ababab] mb-2 mt-3 text-sm font-medium">
               Número de mesa
@@ -49,8 +66,8 @@ const Modal: FC<ModalProps> = ({ setIsTableModalOpen }) => {
               <input
                 type="number"
                 name="tableNo"
-                // onChange={""}
-                value={""}
+                onChange={handleInputChange}
+                value={tableData.tableNo}
                 placeholder="Ingresa el número de la mesa"
                 className="bg-transparent flex-1 text-white focus:outline-none"
                 required
@@ -65,8 +82,8 @@ const Modal: FC<ModalProps> = ({ setIsTableModalOpen }) => {
               <input
                 type="number"
                 name="seats"
-                // onChange={""}
-                value={""}
+                onChange={handleInputChange}
+                value={tableData.seats}
                 placeholder="Ingresa cantidad de asientos"
                 className="bg-transparent flex-1 text-white focus:outline-none"
                 required

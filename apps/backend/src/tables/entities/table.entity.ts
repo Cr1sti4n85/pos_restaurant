@@ -10,6 +10,9 @@ export class Table {
   @Prop({ type: String, default: 'available', required: true })
   status: string;
 
+  @Prop({ type: Number, required: true })
+  seats: number;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Order' })
   currentOrder: Types.ObjectId;
 }

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTableDto } from './dto/create-table.dto';
 import { UpdateTableDto } from './dto/update-table.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -10,18 +14,17 @@ export class TablesService {
   constructor(@InjectModel(Table.name) private tableModel: Model<Table>) {}
 
   async addTable(createTableDto: CreateTableDto) {
-    const { tableNo } = createTableDto;
+    const { tableNo, seats } = createTableDto;
 
     const tableExist = await this.tableModel.findOne({ tableNo });
 
     if (tableExist) {
-      throw new BadRequestException(
-        `Table with number ${tableNo} already exists`,
-      );
+      throw new BadRequestException(`Mesa número ${tableNo} ya está reservada`);
     }
 
     const newTable = await this.tableModel.create({
       tableNo,
+      seats,
     });
 
     return newTable;
@@ -34,7 +37,7 @@ export class TablesService {
   async findOne(id: Types.ObjectId) {
     const table = await this.tableModel.findById(id).exec();
     if (!table) {
-      throw new Error(`Table with id ${id} not found`);
+      throw new NotFoundException(`No se encuentra mesa con id ${id}`);
     }
 
     return table;
