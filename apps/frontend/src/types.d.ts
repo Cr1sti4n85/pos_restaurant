@@ -177,3 +177,15 @@ interface IPlaceOrder {
   items: Items[];
   bill: Bill;
 }
+
+//update table
+
+export enum TableStatus {
+  AVAILABLE = "available",
+  BOOKED = "booked",
+}
+
+export type UpdateTable = {
+  status: TableStatus;
+  orderId: string;
+};

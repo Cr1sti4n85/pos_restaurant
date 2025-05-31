@@ -28,7 +28,6 @@ const TableCard: FC<TableCardProps> = ({
       tableId: id,
       tableNo: name,
     };
-    console.log(table);
     updateTable(table);
     localStorage.setItem("table", JSON.stringify(table));
     navigate("/menu");

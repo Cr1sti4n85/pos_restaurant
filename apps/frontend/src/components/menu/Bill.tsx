@@ -4,15 +4,39 @@ import { calculateTax } from "../../utils/calculateTax";
 import { enqueueSnackbar } from "notistack";
 import { useClientStore } from "../../store/useClientStore";
 import { IPlaceOrder, OrderStatus } from "../../types.d";
+import { usePlaceOrder } from "../../hooks/order/usePlaceOrder";
 
 const Bill: FC = () => {
   const { getTotalPrice, cart } = useCartStore();
+
+  const filteredCart = cart.map((item) => ({
+    itemName: item.itemName,
+    quantity: item.quantity,
+    price: item.price,
+  }));
+
   const total = getTotalPrice();
   const totalWithTax = calculateTax(total);
+  const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [order, setOrder] = useState<IPlaceOrder>({
+    customer: {
+      name: "",
+      phone: "",
+      guests: 0,
+    },
+    orderStatus: OrderStatus.PROGRESS,
+    bill: {
+      total: 0,
+      totalWithTax: 0,
+      tax: 0,
+    },
+    items: [],
+    table: "",
+  });
 
   const { name, phone, guests, table } = useClientStore();
 
-  const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const { placeOrder } = usePlaceOrder(order);
 
   const handlePlaceOrder = async () => {
     if (!paymentMethod) {
@@ -34,9 +58,11 @@ const Bill: FC = () => {
         totalWithTax,
         tax: totalWithTax - total,
       },
-      items: cart,
+      items: filteredCart,
       table: table?.tableId as string,
     };
+    setOrder(orderData);
+    placeOrder();
   };
 
   return (

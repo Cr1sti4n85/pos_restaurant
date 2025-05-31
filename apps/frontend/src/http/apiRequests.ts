@@ -7,6 +7,7 @@ import {
   IPlaceOrder,
   IRegisterEmployee,
   ITableData,
+  UpdateTable,
 } from "../types";
 
 //employee Requests
@@ -35,7 +36,16 @@ export const getTables = async (): Promise<ITableData[]> => {
   return response.data;
 };
 
+export const updateTable = async (
+  data: UpdateTable,
+  id: string
+): Promise<UpdateTable> => {
+  const response = await API.patch(`/tables/${id}`, data);
+  return await response.data;
+};
+
 //Order requests
 
-export const placeOrder = async (data: IPlaceOrder): Promise<AxiosResponse> =>
-  API.post<IPlaceOrder>("/orders", data);
+export const createOrder = async (
+  data: Partial<IPlaceOrder>
+): Promise<AxiosResponse> => API.post<Partial<IPlaceOrder>>("/orders", data);
