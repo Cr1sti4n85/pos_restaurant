@@ -33,18 +33,23 @@ export interface Menus {
 
 //ClientStore
 
+export type Table = {
+  tableId: string;
+  tableNo: string;
+};
+
 interface IClientData {
   name: string;
   phone: string;
   guests: number;
-  tableNo: string;
+  table: Table | null;
   orderId: string;
 }
 
 export interface ClientStore extends IClientData {
   setCustomer: (customer: Partial<IClientData>) => void;
   removeCustomer: () => void;
-  updateTable: (data: Partial<Pick<IClientData, "tableNo">>) => void;
+  updateTable: (data: Table) => void;
 }
 
 //Cart
@@ -137,4 +142,38 @@ export interface ITableData extends IAddTableData {
   _id: string;
   status: string;
   currentOrder: CurrentOrder;
+}
+
+//Place Order
+
+export enum OrderStatus {
+  PROGRESS = "progress",
+  READY = "ready",
+  COMPLETED = "completed",
+}
+
+interface ICustomerDetails {
+  name: string;
+  phone: string;
+  guests: number;
+}
+
+interface Items {
+  itemName: string;
+  quantity: number;
+  price: number;
+}
+
+interface Bill {
+  total: number;
+  tax: number;
+  totalWithTax: number;
+}
+
+interface IPlaceOrder {
+  customer: ICustomerDetails;
+  orderStatus: OrderStatus;
+  table: string;
+  items: Items[];
+  bill: Bill;
 }

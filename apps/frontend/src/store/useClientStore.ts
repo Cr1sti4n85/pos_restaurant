@@ -6,13 +6,12 @@ export const useClientStore = create<ClientStore>((set) => ({
   name: localStorage.getItem("clientName") || "",
   phone: localStorage.getItem("clientPhone") || "",
   guests: Number(localStorage.getItem("guests")) || 0,
-  tableNo: localStorage.getItem("tableNo") || "",
+  table: JSON.parse(localStorage.getItem("table") || "{}"),
   orderId: localStorage.getItem("orderId") || "",
 
   setCustomer: ({ name, phone, guests }) => {
     const orderId = nanoid(10);
     localStorage.setItem("orderId", orderId);
-    localStorage.setItem("tableNo", "N/A");
 
     set({
       name,
@@ -27,14 +26,14 @@ export const useClientStore = create<ClientStore>((set) => ({
       name: "",
       phone: "",
       guests: 0,
-      tableNo: "",
+      table: null,
     });
   },
 
-  updateTable: ({ tableNo }) => {
+  updateTable: (table) => {
     set((state) => ({
       ...state,
-      tableNo: tableNo ?? state.tableNo,
+      table,
     }));
   },
 }));

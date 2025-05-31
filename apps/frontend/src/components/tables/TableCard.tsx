@@ -3,33 +3,44 @@ import { getHexColor } from "../../utils/getBgColor";
 import { useNavigate } from "react-router";
 import { useClientStore } from "../../store/useClientStore";
 import { getInitials } from "../../utils/getInitials";
+import { Table } from "../../types";
 
 type TableCardProps = {
-  tableName: string;
+  id: string;
+  tableNo: string;
   status: string;
   seats: number;
   name: string;
 };
 
-const TableCard: FC<TableCardProps> = ({ tableName, status, seats, name }) => {
+const TableCard: FC<TableCardProps> = ({
+  id,
+  tableNo,
+  status,
+  seats,
+  name,
+}) => {
   const navigate = useNavigate();
   const { updateTable } = useClientStore();
   const handleClick = (name: string) => {
     if (status === "Reservada") return;
-    updateTable({ tableNo: name });
-    localStorage.setItem("tableNo", name);
+    const table: Table = {
+      tableId: id,
+      tableNo: name,
+    };
+    console.log(table);
+    updateTable(table);
+    localStorage.setItem("table", JSON.stringify(table));
     navigate("/menu");
   };
 
   return (
     <div
-      onClick={() => handleClick(tableName)}
+      onClick={() => handleClick(tableNo)}
       className="w-[300px] bg-[#262626] hover:bg-[#2c2c2c] p-4 rounded-lg cursor-pointer"
     >
       <div className="flex items-center justify-between px-1">
-        <h1 className="text-[#f5f5f5] text-xl font-semibold">
-          Mesa {tableName}
-        </h1>
+        <h1 className="text-[#f5f5f5] text-xl font-semibold">Mesa {tableNo}</h1>
         <p
           className={`${
             status === "Reservada"

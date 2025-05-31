@@ -46,7 +46,8 @@ const Tables: FC = () => {
         {tablesData?.map((table) => (
           <TableCard
             key={table._id}
-            tableName={table.tableNo}
+            id={table._id}
+            tableNo={table.tableNo}
             status={table.status}
             seats={+table.seats}
             name={table.currentOrder?.customer.name}

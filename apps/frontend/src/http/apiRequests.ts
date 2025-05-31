@@ -4,6 +4,7 @@ import {
   IAddTableData,
   IAuthUser,
   ILoginEmployee,
+  IPlaceOrder,
   IRegisterEmployee,
   ITableData,
 } from "../types";
@@ -33,3 +34,8 @@ export const getTables = async (): Promise<ITableData[]> => {
   const response = await API.get<ITableData[]>("/tables");
   return response.data;
 };
+
+//Order requests
+
+export const placeOrder = async (data: IPlaceOrder): Promise<AxiosResponse> =>
+  API.post<IPlaceOrder>("/orders", data);
