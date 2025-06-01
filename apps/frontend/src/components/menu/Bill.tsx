@@ -3,7 +3,7 @@ import { useCartStore } from "../../store/useCartStore";
 import { calculateTax } from "../../utils/calculateTax";
 import { enqueueSnackbar } from "notistack";
 import { useClientStore } from "../../store/useClientStore";
-import { IPlaceOrder, OrderStatus } from "../../types.d";
+import { IOrderData, OrderStatus } from "../../types.d";
 import { usePlaceOrder } from "../../hooks/order/usePlaceOrder";
 
 const Bill: FC = () => {
@@ -18,7 +18,7 @@ const Bill: FC = () => {
   const total = getTotalPrice();
   const totalWithTax = calculateTax(total);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
-  const [order, setOrder] = useState<IPlaceOrder>({
+  const [order, setOrder] = useState<IOrderData>({
     customer: {
       name: "",
       phone: "",
@@ -46,7 +46,7 @@ const Bill: FC = () => {
       return;
     }
 
-    const orderData: IPlaceOrder = {
+    const orderData: IOrderData = {
       customer: {
         name,
         phone,

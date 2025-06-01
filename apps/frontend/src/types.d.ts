@@ -171,12 +171,17 @@ interface Bill {
   totalWithTax: number;
 }
 
-interface IPlaceOrder {
+export interface IOrderData {
   customer: ICustomerDetails;
   orderStatus: OrderStatus;
   table: string;
   items: Items[];
   bill: Bill;
+}
+
+export interface IReturnedOrdersData extends IOrderData {
+  _id: string;
+  orderDate: Date;
 }
 
 //update table

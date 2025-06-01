@@ -1,10 +1,10 @@
 import { enqueueSnackbar } from "notistack";
-import { IPlaceOrder, TableStatus } from "../../types.d";
+import { IOrderData, TableStatus } from "../../types.d";
 import { useMutation } from "@tanstack/react-query";
 import { createOrder } from "../../http/apiRequests";
 import { useUpdateTable } from "../table/useUpdateTable";
 
-export const usePlaceOrder = (order: IPlaceOrder) => {
+export const usePlaceOrder = (order: IOrderData) => {
   const { customer, orderStatus, bill, items, table } = order;
   const { updateTableData } = useUpdateTable();
 

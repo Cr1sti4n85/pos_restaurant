@@ -2,9 +2,22 @@ import { FC, useState } from "react";
 import BottomNav from "../components/shared/BottomNav";
 import OrderCard from "../components/orders/OrderCard";
 import BackButton from "../components/shared/BackButton";
+import useOrders from "../hooks/order/useOrders";
+import PageLoader from "../components/shared/PageLoader";
+import { enqueueSnackbar } from "notistack";
 
 const Orders: FC = () => {
   const [status, setStatus] = useState("all");
+
+  const { ordersData, isError, isLoading } = useOrders();
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
+  if (isError) {
+    enqueueSnackbar("Hubo un error al cargar los datos", { variant: "error" });
+  }
 
   return (
     <section className="bg-[#1f1f1f] h-[calc(100vh-5rem)] overflow-hidden">
@@ -50,15 +63,16 @@ const Orders: FC = () => {
           </button>
         </div>
       </div>
-      <div className="scroll flex flex-wrap gap-6 px-16 py-4 overflow-y-scroll h-[calc(100vh-5rem-7rem)]">
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
+      <div className="scroll flex flex-wrap justify-between gap-2 px-16 py-4 pb-4 overflow-y-scroll ">
+        {ordersData && ordersData?.length > 0 ? (
+          ordersData?.map((order) => (
+            <OrderCard key={order._id} order={order} />
+          ))
+        ) : (
+          <p className="col-span-3 text-gray-500">
+            No hay órdenes confirmadas por el momento
+          </p>
+        )}
       </div>
       <BottomNav />
     </section>
