@@ -7,7 +7,7 @@ import { IPlaceOrder, OrderStatus } from "../../types.d";
 import { usePlaceOrder } from "../../hooks/order/usePlaceOrder";
 
 const Bill: FC = () => {
-  const { getTotalPrice, cart } = useCartStore();
+  const { getTotalPrice, cart, removeAllItemsFromCart } = useCartStore();
 
   const filteredCart = cart.map((item) => ({
     itemName: item.itemName,
@@ -34,7 +34,7 @@ const Bill: FC = () => {
     table: "",
   });
 
-  const { name, phone, guests, table } = useClientStore();
+  const { name, phone, guests, table, removeCustomer } = useClientStore();
 
   const { placeOrder } = usePlaceOrder(order);
 
@@ -63,6 +63,8 @@ const Bill: FC = () => {
     };
     setOrder(orderData);
     placeOrder();
+    removeCustomer();
+    removeAllItemsFromCart();
   };
 
   return (

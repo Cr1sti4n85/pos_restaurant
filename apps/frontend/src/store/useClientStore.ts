@@ -22,11 +22,18 @@ export const useClientStore = create<ClientStore>((set) => ({
   },
 
   removeCustomer: () => {
+    localStorage.removeItem("clientName");
+    localStorage.removeItem("clientPhone");
+    localStorage.removeItem("guests");
+    localStorage.removeItem("table");
+    localStorage.removeItem("orderId");
+
     set({
       name: "",
       phone: "",
       guests: 0,
       table: null,
+      orderId: "",
     });
   },
 

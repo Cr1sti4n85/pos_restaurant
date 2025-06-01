@@ -66,6 +66,7 @@ export interface CartStore {
   addItems: (item: ICartData) => void;
   removeItems: (id: string) => void;
   getTotalPrice: () => number;
+  removeAllItemsFromCart: () => void;
 }
 
 //Employees

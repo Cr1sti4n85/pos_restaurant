@@ -31,4 +31,10 @@ export const useCartStore = create<CartStore>((set, get) => ({
     const { cart } = get();
     return cart.reduce((total, item) => total + item.price, 0);
   },
+
+  removeAllItemsFromCart: () => {
+    set({
+      cart: [],
+    });
+  },
 }));
