@@ -12,6 +12,7 @@ export const useUpdateTable = () => {
     onSuccess: () => {
       enqueueSnackbar("Mesa actualizada", { variant: "success" });
       queryClient.invalidateQueries({ queryKey: ["tables"] });
+      queryClient.invalidateQueries({ queryKey: ["table"] });
     },
     onError: (error) => {
       if (error) {

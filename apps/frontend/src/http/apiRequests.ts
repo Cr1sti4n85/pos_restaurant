@@ -7,6 +7,7 @@ import {
   IOrderData,
   IRegisterEmployee,
   IReturnedOrdersData,
+  IReturnedTable,
   ITableData,
   OrderStatus,
   UpdateOrder,
@@ -45,6 +46,11 @@ export const updateTable = async (
 ): Promise<UpdateTable> => {
   const response = await API.patch(`/tables/${id}`, data);
   return await response.data;
+};
+
+export const getOneTable = async (id: string): Promise<IReturnedTable> => {
+  const response = await API.get<IReturnedTable>(`/tables/${id}`);
+  return response.data;
 };
 
 //Order requests

@@ -69,6 +69,7 @@ const Bill: FC = () => {
     placeOrder();
     removeCustomer();
     removeAllItemsFromCart();
+    setShowInvoice(true);
   };
 
   return (

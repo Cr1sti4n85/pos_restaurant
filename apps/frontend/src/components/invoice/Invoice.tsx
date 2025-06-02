@@ -2,6 +2,8 @@ import React, { FC, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaCheck } from "react-icons/fa6";
 import { IOrderData } from "../../types.d";
+import useGetTableById from "../../hooks/table/useGetTableById";
+import PageLoader from "../shared/PageLoader";
 
 type InvoiceProps = {
   orderInfo: IOrderData;
@@ -9,39 +11,57 @@ type InvoiceProps = {
 };
 
 const Invoice: FC<InvoiceProps> = ({ orderInfo, setShowInvoice }) => {
-  const invoiceRef = useRef<HTMLDivElement>(null);
+  const { tableData, isLoading } = useGetTableById({}, orderInfo.table);
 
+  const invoiceRef = useRef<HTMLDivElement>(null);
   const handlePrint = () => {
     if (!invoiceRef.current) return;
 
     const printContent = invoiceRef.current.innerHTML;
-    const WinPrint = window.open("", "", "width=900,height=650");
+    const printWindow = window.open("", "", "width=900,height=650");
 
-    if (!WinPrint) return;
+    if (!printWindow) return;
 
-    WinPrint.document.write(`
-            <html>
-              <head>
-                <title>Order Receipt</title>
-                <style>
-                  body { font-family: Arial, sans-serif; padding: 20px; }
-                  .receipt-container { width: 300px; border: 1px solid #ddd; padding: 10px; }
-                  h2 { text-align: center; }
-                </style>
-              </head>
-              <body>
-                ${printContent}
-              </body>
-            </html>
-          `);
+    // Creamos manualmente el contenido del documento
+    const doc = printWindow.document;
 
-    WinPrint.document.close();
-    WinPrint.focus();
+    // Crear HTML básico
+    const html = doc.createElement("html");
+    const head = doc.createElement("head");
+    const body = doc.createElement("body");
+
+    const title = doc.createElement("title");
+    title.textContent = "Comprobante de compra";
+
+    const style = doc.createElement("style");
+    style.textContent = `
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .receipt-container { width: 300px; border: 1px solid #ddd; padding: 10px; }
+    h2 { text-align: center; }
+  `;
+
+    head.appendChild(title);
+    head.appendChild(style);
+    html.appendChild(head);
+
+    const container = doc.createElement("div");
+    container.innerHTML = printContent;
+
+    body.appendChild(container);
+    html.appendChild(body);
+
+    // Reemplazar todo el documento
+    doc.replaceChild(html, doc.documentElement);
+
+    // Esperar a que el DOM del nuevo documento se renderice antes de imprimir
     setTimeout(() => {
-      WinPrint.print();
-      WinPrint.close();
-    }, 1000);
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
+    }, 500);
   };
+
+  if (isLoading) return <PageLoader />;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -75,7 +95,8 @@ const Invoice: FC<InvoiceProps> = ({ orderInfo, setShowInvoice }) => {
 
           <div className="mt-4 border-t pt-4 text-sm text-gray-700">
             <p>
-              <strong>Order ID:</strong> {}
+              <strong>Order ID:</strong>
+              {tableData?.currentOrder}
             </p>
             <p>
               <strong>Name:</strong> {orderInfo.customer.name}
@@ -145,13 +166,13 @@ const Invoice: FC<InvoiceProps> = ({ orderInfo, setShowInvoice }) => {
             onClick={handlePrint}
             className="text-blue-500 hover:underline text-xs px-4 py-2 rounded-lg"
           >
-            Print Receipt
+            Imprimir comprobante
           </button>
           <button
             onClick={() => setShowInvoice(false)}
             className="text-red-500 hover:underline text-xs px-4 py-2 rounded-lg"
           >
-            Close
+            Cerrar
           </button>
         </div>
       </div>
