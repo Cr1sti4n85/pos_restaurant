@@ -174,6 +174,7 @@ interface Bill {
 export interface IOrderData {
   customer: ICustomerDetails;
   orderStatus: OrderStatus;
+  paymentMethod: string;
   table: string;
   items: Items[];
   bill: Bill;

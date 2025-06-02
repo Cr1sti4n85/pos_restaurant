@@ -5,12 +5,12 @@ import { createOrder } from "../../http/apiRequests";
 import { useUpdateTable } from "../table/useUpdateTable";
 
 export const usePlaceOrder = (order: IOrderData) => {
-  const { customer, orderStatus, bill, items, table } = order;
+  const { customer, orderStatus, bill, paymentMethod, items, table } = order;
   const { updateTableData } = useUpdateTable();
 
   const { mutate: placeOrder, ...rest } = useMutation({
     mutationFn: () =>
-      createOrder({ customer, orderStatus, bill, items, table }),
+      createOrder({ customer, orderStatus, bill, paymentMethod, items, table }),
     onSuccess: ({ data }) => {
       const tableData = { status: TableStatus.BOOKED, orderId: data._id };
       updateTableData({ data: tableData, id: table });

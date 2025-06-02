@@ -11,14 +11,22 @@ import { Table } from 'src/tables/entities/table.entity';
 export class OrdersService {
   constructor(@InjectModel(Order.name) private orderModel: Model<Order>) {}
   async create(createOrderDto: CreateOrderDto) {
-    const { customer, orderStatus, orderDate, table, items, bill } =
-      createOrderDto;
+    const {
+      customer,
+      orderStatus,
+      orderDate,
+      table,
+      paymentMethod,
+      items,
+      bill,
+    } = createOrderDto;
     // Create a new order
     const order = await this.orderModel.create({
       customer,
       orderStatus,
       orderDate,
       table,
+      paymentMethod,
       items,
       bill,
     });

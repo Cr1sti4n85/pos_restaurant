@@ -25,6 +25,7 @@ const Bill: FC = () => {
       guests: 0,
     },
     orderStatus: OrderStatus.PROGRESS,
+    paymentMethod: "cash",
     bill: {
       total: 0,
       totalWithTax: 0,
@@ -53,6 +54,7 @@ const Bill: FC = () => {
         guests,
       },
       orderStatus: OrderStatus.PROGRESS,
+      paymentMethod,
       bill: {
         total,
         totalWithTax,
@@ -83,15 +85,15 @@ const Bill: FC = () => {
       </div>
       <div className="flex items-center gap-3 px-5 mt-4">
         <button
-          onClick={() => setPaymentMethod("Efectivo")}
-          className={`bg-[#1f1f1f] px-4 py-3 w-full rounded-lg text-[#ababab] font-semibold ${paymentMethod === "Efectivo" ? "bg-[#383737]" : ""}`}
+          onClick={() => setPaymentMethod("cash")}
+          className={`bg-[#1f1f1f] px-4 py-3 w-full rounded-lg text-[#ababab] font-semibold ${paymentMethod === "cash" ? "bg-[#383737]" : ""}`}
         >
           Efectivo
         </button>
         <button
-          onClick={() => setPaymentMethod("Tarjeta")}
+          onClick={() => setPaymentMethod("card")}
           className={`bg-[#1f1f1f] px-4 py-3 w-full rounded-lg text-[#ababab]
-        font-semibold ${paymentMethod === "Tarjeta" ? "bg-[#383737]" : ""}`}
+        font-semibold ${paymentMethod === "card" ? "bg-[#383737]" : ""}`}
         >
           Tarjeta
         </button>

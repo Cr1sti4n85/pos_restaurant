@@ -9,7 +9,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { OrderStatus } from '../types/order.types';
+import { OrderStatus, PaymentMethod } from '../types/order.types';
 import { Types } from 'mongoose';
 
 export class CustomerDto {
@@ -64,6 +64,10 @@ export class CreateOrderDto {
   @IsMongoId()
   @IsNotEmpty()
   table: Types.ObjectId;
+
+  @IsNotEmpty()
+  @IsEnum(PaymentMethod)
+  paymentMethod: PaymentMethod;
 
   @IsNotEmpty()
   @ValidateNested()

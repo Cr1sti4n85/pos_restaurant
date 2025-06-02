@@ -3,3 +3,8 @@ export enum OrderStatus {
   READY = 'ready',
   COMPLETED = 'completed',
 }
+
+export enum PaymentMethod {
+  CASH = 'cash',
+  CARD = 'card',
+}
