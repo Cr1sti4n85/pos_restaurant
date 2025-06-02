@@ -5,17 +5,20 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Order } from './entities/order.entity';
 import { Model } from 'mongoose';
 import { OrderStatus } from './types/order.types';
+import { Table } from 'src/tables/entities/table.entity';
 
 @Injectable()
 export class OrdersService {
   constructor(@InjectModel(Order.name) private orderModel: Model<Order>) {}
   async create(createOrderDto: CreateOrderDto) {
-    const { customer, orderStatus, orderDate, items, bill } = createOrderDto;
+    const { customer, orderStatus, orderDate, table, items, bill } =
+      createOrderDto;
     // Create a new order
     const order = await this.orderModel.create({
       customer,
       orderStatus,
       orderDate,
+      table,
       items,
       bill,
     });
@@ -24,7 +27,10 @@ export class OrdersService {
   }
 
   findAll() {
-    return this.orderModel.find().exec();
+    return this.orderModel.find().populate({
+      path: 'table',
+      model: Table.name,
+    });
   }
 
   async findOne(id: string) {

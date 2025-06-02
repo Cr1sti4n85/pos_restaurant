@@ -2,6 +2,7 @@ import { Type } from 'class-transformer';
 import {
   IsDate,
   IsEnum,
+  IsMongoId,
   IsNotEmpty,
   IsOptional,
   IsPositive,
@@ -9,6 +10,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { OrderStatus } from '../types/order.types';
+import { Types } from 'mongoose';
 
 export class CustomerDto {
   @IsNotEmpty()
@@ -58,6 +60,10 @@ export class CreateOrderDto {
   @IsDate()
   @IsOptional()
   orderDate: Date;
+
+  @IsMongoId()
+  @IsNotEmpty()
+  table: Types.ObjectId;
 
   @IsNotEmpty()
   @ValidateNested()

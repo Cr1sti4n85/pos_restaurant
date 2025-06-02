@@ -179,9 +179,22 @@ export interface IOrderData {
   bill: Bill;
 }
 
-export interface IReturnedOrdersData extends IOrderData {
+export interface IReturnedTable {
+  _id: string;
+  currentOrder: string;
+  seats: number;
+  status: TableStatus;
+  tableNo: number;
+}
+
+export interface IReturnedOrdersData {
   _id: string;
   orderDate: Date;
+  customer: ICustomerDetails;
+  orderStatus: OrderStatus;
+  table: IReturnedTable;
+  items: Items[];
+  bill: Bill;
 }
 
 //update table

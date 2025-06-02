@@ -63,7 +63,7 @@ const Orders: FC = () => {
           </button>
         </div>
       </div>
-      <div className="scroll flex flex-wrap justify-between gap-2 px-16 py-4 pb-4 overflow-y-scroll ">
+      <div className="scroll flex flex-wrap justify-start gap-2 px-16 py-4 pb-4 overflow-y-scroll ">
         {ordersData && ordersData?.length > 0 ? (
           ordersData?.map((order) => (
             <OrderCard key={order._id} order={order} />

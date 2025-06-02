@@ -9,7 +9,8 @@ export const usePlaceOrder = (order: IOrderData) => {
   const { updateTableData } = useUpdateTable();
 
   const { mutate: placeOrder, ...rest } = useMutation({
-    mutationFn: () => createOrder({ customer, orderStatus, bill, items }),
+    mutationFn: () =>
+      createOrder({ customer, orderStatus, bill, items, table }),
     onSuccess: ({ data }) => {
       const tableData = { status: TableStatus.BOOKED, orderId: data._id };
       updateTableData({ data: tableData, id: table });

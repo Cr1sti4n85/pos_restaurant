@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaCheckDouble, FaCircle } from "react-icons/fa";
+import { FaCheckDouble, FaCircle, FaLongArrowAltRight } from "react-icons/fa";
 import { IReturnedOrdersData, OrderStatus } from "../../types.d";
 import { getInitials } from "../../utils/getInitials";
 import { formatDateAndTime } from "../../utils/formatDateTime";
@@ -24,6 +24,11 @@ const OrderCard: FC<OrderCardProps> = ({ order }) => {
             </h1>
             <p className="text-[#ababab] text-sm">
               #{order._id.substring(16)}/ Para llevar
+            </p>
+            <p className="text-[#ababab] text-sm">
+              Mesa{" "}
+              <FaLongArrowAltRight className="text-[#ababab] ml-2 inline" />{" "}
+              {order.table.tableNo}
             </p>
           </div>
           <div className="flex flex-col gap-2">
