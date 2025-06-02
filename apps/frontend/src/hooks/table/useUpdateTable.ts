@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { UpdateTable } from "../../types";
 import { updateTable } from "../../http/apiRequests";
 import { enqueueSnackbar } from "notistack";
+import queryClient from "../../config/queryClient";
 
 export const useUpdateTable = () => {
   const { mutate: updateTableData, ...rest } = useMutation({
@@ -10,6 +11,7 @@ export const useUpdateTable = () => {
     ) => updateTable(data, id),
     onSuccess: () => {
       enqueueSnackbar("Mesa actualizada", { variant: "success" });
+      queryClient.invalidateQueries({ queryKey: ["tables"] });
     },
     onError: (error) => {
       if (error) {

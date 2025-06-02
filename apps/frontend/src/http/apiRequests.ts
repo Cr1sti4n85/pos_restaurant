@@ -8,6 +8,8 @@ import {
   IRegisterEmployee,
   IReturnedOrdersData,
   ITableData,
+  OrderStatus,
+  UpdateOrder,
   UpdateTable,
 } from "../types";
 
@@ -53,5 +55,13 @@ export const createOrder = async (
 
 export const getOrders = async (): Promise<IReturnedOrdersData[]> => {
   const response = await API.get<IReturnedOrdersData[]>("/orders");
+  return response.data;
+};
+
+export const updateOrderStatus = async (
+  data: OrderStatus,
+  id: string
+): Promise<UpdateOrder> => {
+  const response = await API.patch(`/orders/${id}`, { orderStatus: data });
   return response.data;
 };

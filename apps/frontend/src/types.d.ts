@@ -213,3 +213,8 @@ export type UpdateTable = {
 export type OrderProps = {
   order: IReturnedOrdersData;
 };
+
+//update order
+export type UpdateOrder = {
+  orderStatus: OrderStatus;
+};
