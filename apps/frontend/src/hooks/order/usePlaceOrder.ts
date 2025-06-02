@@ -3,6 +3,7 @@ import { IOrderData, TableStatus } from "../../types.d";
 import { useMutation } from "@tanstack/react-query";
 import { createOrder } from "../../http/apiRequests";
 import { useUpdateTable } from "../table/useUpdateTable";
+import queryClient from "../../config/queryClient";
 
 export const usePlaceOrder = (order: IOrderData) => {
   const { customer, orderStatus, bill, paymentMethod, items, table } = order;
@@ -15,6 +16,7 @@ export const usePlaceOrder = (order: IOrderData) => {
       const tableData = { status: TableStatus.BOOKED, orderId: data._id };
       updateTableData({ data: tableData, id: table });
       enqueueSnackbar("Orden confirmada", { variant: "success" });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error) => {
       if (error) {

@@ -5,6 +5,7 @@ import { enqueueSnackbar } from "notistack";
 import { useClientStore } from "../../store/useClientStore";
 import { IOrderData, OrderStatus } from "../../types.d";
 import { usePlaceOrder } from "../../hooks/order/usePlaceOrder";
+import Invoice from "../invoice/Invoice";
 
 const Bill: FC = () => {
   const { getTotalPrice, cart, removeAllItemsFromCart } = useCartStore();
@@ -18,6 +19,9 @@ const Bill: FC = () => {
   const total = getTotalPrice();
   const totalWithTax = calculateTax(total);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [showInvoice, setShowInvoice] = useState<boolean>(false);
+  const { name, phone, guests, table, removeCustomer } = useClientStore();
+
   const [order, setOrder] = useState<IOrderData>({
     customer: {
       name: "",
@@ -34,8 +38,6 @@ const Bill: FC = () => {
     items: [],
     table: "",
   });
-
-  const { name, phone, guests, table, removeCustomer } = useClientStore();
 
   const { placeOrder } = usePlaceOrder(order);
 
@@ -113,6 +115,9 @@ const Bill: FC = () => {
           Confirmar orden
         </button>
       </div>
+      {showInvoice && (
+        <Invoice orderInfo={order} setShowInvoice={setShowInvoice} />
+      )}
     </>
   );
 };
