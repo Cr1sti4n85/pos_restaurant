@@ -208,3 +208,8 @@ export type UpdateTable = {
   status: TableStatus;
   orderId: string;
 };
+
+//order props for recent orders and order list
+export type OrderProps = {
+  order: IReturnedOrdersData;
+};

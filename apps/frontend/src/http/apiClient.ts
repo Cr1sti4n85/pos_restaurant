@@ -39,7 +39,7 @@ API.interceptors.response.use(
       } catch {
         queryClient.clear();
         // redirect to login page
-        window.location.href = "/inicio";
+        window.location.href = "/auth";
       }
     }
 

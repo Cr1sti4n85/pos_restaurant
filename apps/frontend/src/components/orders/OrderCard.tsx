@@ -1,14 +1,10 @@
 import { FC } from "react";
 import { FaCheckDouble, FaCircle, FaLongArrowAltRight } from "react-icons/fa";
-import { IReturnedOrdersData, OrderStatus } from "../../types.d";
+import { OrderProps, OrderStatus } from "../../types.d";
 import { getInitials } from "../../utils/getInitials";
 import { formatDateAndTime } from "../../utils/formatDateTime";
 
-type OrderCardProps = {
-  order: IReturnedOrdersData;
-};
-
-const OrderCard: FC<OrderCardProps> = ({ order }) => {
+const OrderCard: FC<OrderProps> = ({ order }) => {
   console.log(order);
 
   return (

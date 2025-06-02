@@ -1,8 +1,11 @@
 import { FC } from "react";
 import { FaSearch } from "react-icons/fa";
 import OrderList from "./OrderList";
+import useOrders from "../../hooks/order/useOrders";
 
 const RecentOrders: FC = () => {
+  const { ordersData } = useOrders();
+
   return (
     <div className="px-8 mt-6">
       <div className="bg-[#1a1a1a] w-full rounded-lg">
@@ -28,12 +31,15 @@ const RecentOrders: FC = () => {
         </div>
         {/*Order list */}
         <div className=" scroll mt-4 px-6 pb-2 gap-2 overflow-y-scroll h-[120px]">
-          <OrderList />
-          <OrderList />
-          <OrderList />
-          <OrderList />
-          <OrderList />
-          <OrderList />
+          {ordersData && ordersData?.length > 0 ? (
+            ordersData?.map((order) => (
+              <OrderList key={order._id} order={order} />
+            ))
+          ) : (
+            <p className="col-span-3 text-gray-500">
+              No hay órdenes confirmadas por el momento
+            </p>
+          )}
         </div>
       </div>
     </div>

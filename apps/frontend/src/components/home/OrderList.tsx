@@ -1,36 +1,41 @@
 import { FC } from "react";
 import { FaCheckDouble, FaCircle } from "react-icons/fa";
+import { OrderProps, OrderStatus } from "../../types.d";
+import { getInitials } from "../../utils/getInitials";
 
-const OrderList: FC = () => {
+const OrderList: FC<OrderProps> = ({ order }) => {
   return (
     <div className="flex items-center gap-5 mb-3">
       <button className="bg-[#f6b100] p-3 text-xl font-bold rounded-lg">
-        AM
+        {getInitials(order.customer.name)}
       </button>
       <div className="flex items-center justify-between w-[100%] gap-6">
         <div className="flex flex-col items-start gap-1">
           <h1 className="text-[#f5f5f5] text-lg font-semibold tracking-wide">
-            Cristian Perez
+            {order.customer.name}
           </h1>
-          <p className="text-[#ababab] text-sm">8 items</p>
+          <p className="text-[#ababab] text-sm">{order.items.length} items</p>
         </div>
         <div>
           <h1
             className="text-[#f6b100] font-semibold border
            border-[#f6b100] rounded-lg p-1"
           >
-            Mesa N° 2
+            Mesa N° {order.table.tableNo}
           </h1>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <p className="bg-green-300 text-green-600">
-            <FaCheckDouble className="inline mr-2" />
-            Listo
-          </p>
-          <p className="text-[#ababab] text-sm">
-            <FaCircle className="inline mr-2 text-green-600" /> Listo para
-            servir
-          </p>
+          {order.orderStatus === OrderStatus.READY ? (
+            <p className=" text-green-600 bg-[#2e4a40] px-2  py-1 rounded-lg">
+              <FaCheckDouble className="inline mr-2" />
+              {order.orderStatus}
+            </p>
+          ) : (
+            <p className=" text-yellow-600 bg-[#4a452e] px-2  py-1 rounded-lg">
+              <FaCircle className="inline mr-2" />
+              {order.orderStatus}
+            </p>
+          )}
         </div>
       </div>
     </div>
